@@ -16,6 +16,6 @@ data class Company(
     val category: JobCategory,
     val payoutMethods: List<String>,
     val careerUrl: String,
-    val hiringRegions: String = "Philippines & Global Remote",
+    val hiringRegions: String = "Global Remote (Worldwide)",
     val tags: List<String> = emptyList()
-)
+)  
