@@ -1,8 +1,77 @@
 package com.example.data
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import java.net.URL
+
 object CompanyDirectory {
-    val companies: List<Company> = listOf(
-        // 1 - 50: Existing companies (with updated referral URLs where requested)
+    private const val LIVE_GIST_URL =
+        "https://githubusercontent.com"
+
+    var companies: List<Company> by mutableStateOf(defaultCompanies)
+        private set
+
+    init {
+        refreshFromGist()
+    }
+
+    fun refreshFromGist() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val jsonText = URL(LIVE_GIST_URL).readText()
+                val parsed = parseCompanies(jsonText)
+                if (parsed.isNotEmpty()) {
+                    companies = parsed
+                }
+            } catch (_: Exception) {
+                // Keeps offline defaultCompanies if user has no internet
+            }
+        }
+    }
+
+    private fun parseCompanies(jsonText: String): List<Company> {
+        val array = JSONArray(jsonText)
+        val result = mutableListOf<Company>()
+        for (i in 0 until array.length()) {
+            val obj = array.getJSONObject(i)
+            val catStr = obj.optString("category", "AI Training")
+            val category = JobCategory.entries.find {
+                it.displayName.equals(catStr, ignoreCase = true) || it.name.equals(catStr, ignoreCase = true)
+            } ?: JobCategory.AI_TRAINING
+
+            val payouts = mutableListOf<String>()
+            obj.optJSONArray("payoutMethods")?.let { arr ->
+                for (j in 0 until arr.length()) payouts.add(arr.getString(j))
+            }
+
+            val tags = mutableListOf<String>()
+            obj.optJSONArray("tags")?.let { arr ->
+                for (j in 0 until arr.length()) tags.add(arr.getString(j))
+            }
+
+            result.add(
+                Company(
+                    id = obj.optInt("id", i + 1),
+                    name = obj.getString("name"),
+                    description = obj.getString("description"),
+                    category = category,
+                    payoutMethods = payouts,
+                    careerUrl = obj.getString("careerUrl"),
+                    hiringRegions = obj.optString("hiringRegions", "Global Remote (Worldwide)"),
+                    tags = tags
+                )
+            )
+        }
+        return result
+    }
+
+    private val defaultCompanies: List<Company> = listOf(
+
         Company(
             id = 1,
             name = "micro1",
