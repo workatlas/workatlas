@@ -1,0 +1,6 @@
+{
+  "name": "WorkAtlas",
+  "description": "Global remote work directory, AI training & annotation guide, interview preparation hub, and career tools for freelancers worldwide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
