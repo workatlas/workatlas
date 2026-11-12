@@ -83,6 +83,7 @@ fun MainWorkAtlasScreen(
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     var showReminderDialog by remember { mutableStateOf(false) }
+    var showPrivacyDialog by remember { mutableStateOf(false) }
 
     val showBackToTop by remember {
         derivedStateOf { listState.firstVisibleItemIndex > 3 }
@@ -155,17 +156,83 @@ fun MainWorkAtlasScreen(
                             .testTag("companies_list")
                     ) {
                         // WorkAtlas Header with brand logo & live metrics
-                        item(key = "header") {
-                            WorkAtlasHeader(
-                                totalCompanyCount = uiState.totalCompanyCount,
-                                filteredCount = uiState.filteredCompanies.size,
-                                bookmarkedCount = uiState.bookmarkedIds.size,
-                                showOnlyBookmarked = uiState.showOnlyBookmarked,
-                                onToggleBookmarkFilter = { viewModel.toggleShowOnlyBookmarked() },
-                                isReminderEnabled = uiState.isReminderEnabled,
-                                onOpenDailyReminderDialog = { showReminderDialog = true }
-                            )
-                        }
+item(key = "header") {
+    WorkAtlasHeader(
+        totalCompanyCount = uiState.totalCompanyCount,
+        filteredCount = uiState.filteredCompanies.size,
+        bookmarkedCount = uiState.bookmarkedIds.size,
+        showOnlyBookmarked = uiState.showOnlyBookmarked,
+        onToggleBookmarkFilter = { viewModel.toggleShowOnlyBookmarked() },
+        isReminderEnabled = uiState.isReminderEnabled,
+        onOpenDailyReminderDialog = { showReminderDialog = true }
+    )
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        OutlinedButton(
+            onClick = {
+                val shareIntent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(
+                        android.content.Intent.EXTRA_SUBJECT,
+                        "WorkAtlas - Global AI & Remote Job Directory"
+                    )
+                    putExtra(
+                        android.content.Intent.EXTRA_TEXT,
+                        "Check out WorkAtlas! Browse 100+ verified global AI training, data annotation, and remote work platforms with a free ATS resume builder."
+                    )
+                }
+                context.startActivity(
+                    android.content.Intent.createChooser(shareIntent, "Share WorkAtlas")
+                )
+            },
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .weight(1f)
+                .height(38.dp)
+        ) {
+            Icon(
+                imageVector = androidx.compose.material.icons.Icons.Default.Share,
+                contentDescription = null,
+                tint = EmeraldPrimary,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(
+                text = "Share App",
+                color = EmeraldPrimary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+
+        OutlinedButton(
+            onClick = { showPrivacyDialog = true },
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .weight(1f)
+                .height(38.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Info,
+                contentDescription = null,
+                tint = EmeraldPrimary,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(
+                text = "Privacy & Info",
+                color = EmeraldPrimary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    }
+}
+
 
                         // Search Bar
                         item(key = "search_bar") {
@@ -345,5 +412,38 @@ fun MainWorkAtlasScreen(
             viewModel.setDailyReminder(enabled, hour, minute)
         },
         onDismiss = { showReminderDialog = false }
+   if (showPrivacyDialog) {
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = { showPrivacyDialog = false },
+        containerColor = AtlasDarkNavy,
+        title = {
+            Text(
+                text = "Privacy Policy & Disclosure",
+                color = androidx.compose.ui.graphics.Color.White,
+                fontWeight = FontWeight.Bold
+            )
+        },
+        text = {
+            Text(
+                text = "WorkAtlas is a free global directory of remote work and AI training platforms.\n\n" +
+                    "• Local Data Only: Your saved jobs, resume inputs, and reminder preferences stay strictly on your device. We do not collect or sell personal accounts.\n" +
+                    "• Ads & Referrals: WorkAtlas displays Google AdMob ads to remain free. Some external company links include referral codes that help support app updates at zero cost to you.\n" +
+                    "• External Sites: Always verify job terms directly on each company's official career portal.",
+                color = androidx.compose.ui.graphics.Color(0xFFCBD5E1),
+                fontSize = 13.sp,
+                lineHeight = 18.sp
+            )
+        },
+        confirmButton = {
+            androidx.compose.material3.TextButton(
+                onClick = { showPrivacyDialog = false }
+            ) {
+                Text(
+                    text = "Got It",
+                    color = EmeraldPrimary,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
     )
 }
