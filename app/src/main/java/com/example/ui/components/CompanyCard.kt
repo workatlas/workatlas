@@ -85,7 +85,9 @@ fun CategoryFilterRow(
                 label = {
                     Text(
                         text = category.displayName,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                        maxLines = 1,
+                        softWrap = false
                     )
                 },
                 colors = FilterChipDefaults.filterChipColors(
@@ -105,6 +107,7 @@ fun CategoryFilterRow(
         }
     }
 }
+
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
