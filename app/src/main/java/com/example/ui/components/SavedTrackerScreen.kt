@@ -1,3 +1,6 @@
+package com.example.ui.components
+
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -47,61 +50,132 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.data.ApplicationStatus
+import com.example.data.Company
+import com.example.ui.theme.AtlasDarkNavy
+import com.example.ui.theme.AtlasNavyBorder
+import com.example.ui.theme.AtlasNavySurface
+import com.example.ui.theme.EmeraldLight
+import com.example.ui.theme.EmeraldPrimary
+import com.example.ui.theme.TextMuted
+import com.example.ui.theme.TextPrimary
+import com.example.ui.theme.TextSecondary
+import com.example.util.SavedJobsCsvExporter
 
-// Category Filter Chips for Productivity Tools (scrolls edge-to-edge without clipping)
+@Composable
+fun SavedTrackerScreen(
+    bookmarkedCompanies: List<Company>,
+    statuses: Map<Int, ApplicationStatus>,
+    onStatusChange: (Int, ApplicationStatus) -> Unit,
+    onRemoveBookmark: (Int) -> Unit,
+    onApplyClick: (Company) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var selectedFilterStatus by remember { mutableStateOf<ApplicationStatus?>(null) }
+
+    val filteredList = if (selectedFilterStatus == null) {
+        bookmarkedCompanies
+    } else {
+        bookmarkedCompanies.filter { (statuses[it.id] ?: ApplicationStatus.SAVED) == selectedFilterStatus }
+    }
+
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(AtlasDarkNavy)
+            .testTag("saved_tracker_screen")
+    ) {
         item {
-            Row(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 12.dp)
             ) {
-                ProductivityToolCategory.values().forEach { cat ->
-                    val isSelected = selectedToolCategory == cat
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { selectedToolCategory = cat },
-                        label = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(EmeraldPrimary.copy(alpha = 0.2f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.AssignmentTurnedIn,
+                            contentDescription = null,
+                            tint = EmeraldPrimary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = cat.displayName,
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
+                                text = "Application Pipeline Tracker",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary,
+                                modifier = Modifier.weight(1f, fill = false)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = EmeraldPrimary.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    text = "ROOM SYNCED",
+                                    color = EmeraldLight,
+                                    fontSize = 9.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    maxLines = 1,
+                                    softWrap = false,
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                )
+                            }
+                        }
+                        Text(
+                            text = "${bookmarkedCompanies.size} Saved Opportunities • Local SQLite Synced",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = TextSecondary
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    val context = LocalContext.current
+                    OutlinedButton(
+                        onClick = {
+                            SavedJobsCsvExporter.exportAndShareCsv(
+                                context = context,
+                                savedCompanies = bookmarkedCompanies,
+                                statuses = statuses
                             )
                         },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
+                        colors = ButtonDefaults.outlinedButtonColors(
                             containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
+                            contentColor = EmeraldLight
                         ),
-                        shape = RoundedCornerShape(16.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
+                        border = BorderStroke(1.dp, EmeraldPrimary.copy(alpha = 0.5f)),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.testTag("export_csv_btn")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FileDownload,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
                         )
-                    )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "Export CSV",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 12.sp,
+                            maxLines = 1,
+                            softWrap = false
+                        )
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
-
-        // List of Curated Tools with Ethical Guides
-        items(
-            items = filteredTools,
-            key = { it.id }
-        ) { tool ->
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
-                border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 6.dp)
-            ) {
-                        item {
+        item {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -142,7 +216,7 @@ import androidx.compose.ui.unit.sp
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                    border = BorderStroke(1.dp, AtlasNavyBorder),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 24.dp)
@@ -185,7 +259,7 @@ import androidx.compose.ui.unit.sp
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                    border = BorderStroke(1.dp, AtlasNavyBorder),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 6.dp)
