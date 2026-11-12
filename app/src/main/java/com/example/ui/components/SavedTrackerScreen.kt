@@ -189,26 +189,31 @@ fun SavedTrackerScreen(
                 }
             }
         }
-        item(key = "tracker_filter_row") {
-            LazyRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                item(key = "filter_all") {
-                    val isSelected = selectedFilterStatus == null
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { selectedFilterStatus = null },
-                        label = {
-                            Text(
-                                text = "All (${bookmarkedCompanies.size})",
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
-                            )
+               item(key = "tracker_filter_row") {
+            val options = listOf(
+                BentoFilterOption<ApplicationStatus?>(
+                    value = null,
+                    label = "All",
+                    badgeCount = bookmarkedCompanies.size
+                )
+            ) + ApplicationStatus.entries.map { st ->
+                val count = bookmarkedCompanies.count {
+                    (statuses[it.id] ?: ApplicationStatus.SAVED) == st
+                }
+                BentoFilterOption<ApplicationStatus?>(
+                    value = st,
+                    label = st.displayName,
+                    badgeCount = count
+                )
+            }
+            BentoFilterGrid(
+                options = options,
+                selectedValue = selectedFilterStatus,
+                onSelect = { selectedFilterStatus = it }
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+        }
+
                         },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
