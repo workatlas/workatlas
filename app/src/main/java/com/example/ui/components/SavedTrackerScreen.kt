@@ -81,12 +81,10 @@ fun SavedTrackerScreen(
     } else {
         bookmarkedCompanies.filter { (statuses[it.id] ?: ApplicationStatus.SAVED) == selectedFilterStatus }
     }
-
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .background(AtlasDarkNavy)
-            .padding(horizontal = 16.dp)
             .testTag("saved_tracker_screen")
     ) {
         // Header
@@ -94,7 +92,7 @@ fun SavedTrackerScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 12.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
@@ -118,7 +116,8 @@ fun SavedTrackerScreen(
                                 text = "Application Pipeline Tracker",
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
-                                color = TextPrimary
+                                color = TextPrimary,
+                                modifier = Modifier.weight(1f, fill = false)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Surface(
@@ -130,9 +129,10 @@ fun SavedTrackerScreen(
                                     color = EmeraldLight,
                                     fontSize = 9.sp,
                                     fontWeight = FontWeight.Bold,
+                                    maxLines = 1,
+                                    softWrap = false,
                                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
+                                       }
                         }
                         Text(
                             text = "${bookmarkedCompanies.size} Saved Opportunities • Local SQLite Synced",
@@ -140,6 +140,8 @@ fun SavedTrackerScreen(
                             color = TextSecondary
                         )
                     }
+
+                    Spacer(modifier = Modifier.width(8.dp))
 
                     // Export Saved Jobs Button
                     val context = LocalContext.current
@@ -168,26 +170,28 @@ fun SavedTrackerScreen(
                         Text(
                             text = "Export CSV",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp
+                            fontSize = 12.sp,
+                            maxLines = 1,
+                            softWrap = false
                         )
                     }
                 }
             }
         }
 
-        // Status Filter Chips
+        // Status Filter Chips (scrolls edge-to-edge cleanly without clipping)
         item {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
-                    .padding(bottom = 12.dp),
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 FilterChip(
                     selected = selectedFilterStatus == null,
                     onClick = { selectedFilterStatus = null },
-                    label = { Text("All (${bookmarkedCompanies.size})") },
+                    label = { Text("All (${bookmarkedCompanies.size})", maxLines = 1, softWrap = false) },
                     colors = FilterChipDefaults.filterChipColors(
                         selectedContainerColor = EmeraldPrimary,
                         selectedLabelColor = AtlasDarkNavy
@@ -200,7 +204,7 @@ fun SavedTrackerScreen(
                     FilterChip(
                         selected = selectedFilterStatus == st,
                         onClick = { selectedFilterStatus = st },
-                        label = { Text("${st.displayName} ($count)") },
+                        label = { Text("${st.displayName} ($count)", maxLines = 1, softWrap = false) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
                             selectedLabelColor = AtlasDarkNavy
@@ -209,6 +213,7 @@ fun SavedTrackerScreen(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         if (filteredList.isEmpty()) {
@@ -219,7 +224,7 @@ fun SavedTrackerScreen(
                     border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 24.dp)
+                        .padding(horizontal = 16.dp, vertical = 24.dp)
                 ) {
                     Column(
                         modifier = Modifier
@@ -250,6 +255,8 @@ fun SavedTrackerScreen(
                     }
                 }
             }
+        }
+
         } else {
             items(
                 items = filteredList,
