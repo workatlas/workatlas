@@ -358,8 +358,8 @@ fun AiToolsScreen(modifier: Modifier = Modifier) {
                                     .filter { it.isNotBlank() }
                                     .joinToString(" • ")
 
-                                val candidateName = fullName.ifBlank { "Maria Santos" }
-                                val candidateEmail = email.ifBlank { "candidate@email.com" }
+                              val candidateName = fullName.ifBlank { "Remote Candidate" }
+                              val candidateEmail = email.ifBlank { "candidate@email.com" }
 
                                 generatedResumeText = """
 ============================================================
@@ -522,6 +522,45 @@ KEY REMOTE COMPETENCIES
                                     )
                                 }
                             }
+                            Spacer(modifier = Modifier.height(10.dp))
+OutlinedButton(
+    onClick = {
+        val candidateName = fullName.ifBlank { "Remote Candidate" }
+        val skillsSummary = (selectedSkills + customSkillsInput.split(",").map { it.trim() })
+            .filter { it.isNotBlank() }
+            .joinToString(", ")
+            .ifBlank { "AI Training, Prompt Evaluation, and Data Annotation" }
+        val pitchText = """
+            Hi Hiring Team,
+
+            My name is $candidateName, and I am applying for a remote AI & Data contributor role. I bring hands-on experience in $skillsSummary, with a strong focus on accuracy, clear communication, and following detailed quality guidelines.
+
+            I have a reliable high-speed setup and am ready to begin immediately. Thank you for reviewing my application!
+        """.trimIndent()
+
+        clipboardManager.setText(AnnotatedString(pitchText))
+        Toast.makeText(context, "Application pitch copied! Paste it into your job form.", Toast.LENGTH_SHORT).show()
+    },
+    shape = RoundedCornerShape(10.dp),
+    border = androidx.compose.foundation.BorderStroke(1.dp, EmeraldPrimary),
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(44.dp)
+) {
+    Icon(
+        imageVector = Icons.Default.ContentCopy,
+        contentDescription = null,
+        tint = EmeraldPrimary,
+        modifier = Modifier.size(16.dp)
+    )
+    Spacer(modifier = Modifier.width(6.dp))
+    Text(
+        text = "Copy Application Pitch",
+        color = EmeraldPrimary,
+        fontWeight = FontWeight.SemiBold
+    )
+}
+
                         }
                     }
                 }
