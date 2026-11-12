@@ -190,14 +190,19 @@ fun LearnScreen(
                 }
             }
         }
-        item(key = "learn_category_filters") {
-            LazyRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
+               item(key = "learn_category_filters") {
+            val options = listOf(
+                BentoFilterOption<LearnCategory?>(value = null, label = "All Topics")
+            ) + LearnCategory.entries.map { category ->
+                BentoFilterOption<LearnCategory?>(value = category, label = category.displayName)
+            }
+            BentoFilterGrid(
+                options = options,
+                selectedValue = selectedCategory,
+                onSelect = onCategorySelected
+            )
+        }
+
                 item(key = "all_topics") {
                     val isSelected = selectedCategory == null
                     FilterChip(
