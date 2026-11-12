@@ -10,16 +10,11 @@ import org.json.JSONArray
 import java.net.URL
 
 object CompanyDirectory {
-    private const val LIVE_GIST_URL =
+       private const val LIVE_GIST_URL =
         "https://githubusercontent.com"
 
-  var companies: List<Company> by mutableStateOf(emptyList())
-    private set
-
-    init {
-        companies = defaultCompanies
-        refreshFromGist()
-    }
+    var companies: List<Company> by mutableStateOf(emptyList())
+        private set
 
     fun refreshFromGist() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -34,6 +29,7 @@ object CompanyDirectory {
             }
         }
     }
+
 
     private fun parseCompanies(jsonText: String): List<Company> {
         val array = JSONArray(jsonText)
@@ -115,7 +111,7 @@ object CompanyDirectory {
             description = "Pioneer in automatic speech recognition (ASR) and neural machine translation hiring remote linguists and transcriptionists.",
             category = JobCategory.AUDIO_VOICE,
             payoutMethods = listOf("Wire Transfer", "Direct Deposit"),
-            careerUrl = "https://www.apptek.com/careers",
+            careerUrl = "https://www.apptek.ai",
             tags = listOf("Audio Transcription", "ASR Testing", "Phonetics")
         ),
         Company(
@@ -1005,5 +1001,9 @@ object CompanyDirectory {
             careerUrl = "https://visora.com/jobs",
             tags = listOf("Video AI", "Screen Recording", "Model Evaluation")
         )
-    )
+     )
+        init {
+        companies = defaultCompanies
+        refreshFromGist()
+    }
 }
