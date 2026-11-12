@@ -1,14 +1,12 @@
 package com.example.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -43,7 +42,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -52,9 +50,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.LearnCategory
@@ -63,10 +61,8 @@ import com.example.ui.theme.AtlasDarkNavy
 import com.example.ui.theme.AtlasNavy
 import com.example.ui.theme.AtlasNavyBorder
 import com.example.ui.theme.AtlasNavySurface
-import com.example.ui.theme.CyanNeon
 import com.example.ui.theme.EmeraldLight
 import com.example.ui.theme.EmeraldPrimary
-import com.example.ui.theme.TextMuted
 import com.example.ui.theme.TextPrimary
 import com.example.ui.theme.TextSecondary
 
@@ -94,19 +90,16 @@ fun LearnScreen(
         modifier = modifier
             .fillMaxSize()
             .background(AtlasDarkNavy)
-            .testTag("learn_screen_list")
+            .testTag("learn_screen_list"),
+        contentPadding = PaddingValues(bottom = 24.dp)
     ) {
-        // Learn Hub Top Banner with Progress
         item(key = "learn_header") {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(
-                                AtlasDarkNavy,
-                                AtlasNavy
-                            )
+                            colors = listOf(AtlasDarkNavy, AtlasNavy)
                         )
                     )
                     .padding(20.dp)
@@ -148,11 +141,10 @@ fun LearnScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Progress Bar Card
                     Surface(
                         shape = RoundedCornerShape(12.dp),
                         color = AtlasNavySurface,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                        border = BorderStroke(1.dp, AtlasNavyBorder),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
@@ -177,196 +169,193 @@ fun LearnScreen(
                                     )
                                 }
                                 Text(
-                                    text = "$completedCount of $totalLessons Completed (${(progress * 100).toInt()}%)",
+                                    text = "$completedCount of $totalLessons (${(progress * 100).toInt()}%)",
                                     style = MaterialTheme.typography.labelSmall,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = EmeraldLight
+                                    color = EmeraldLight,
+                                    fontWeight = FontWeight.SemiBold
                                 )
                             }
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(10.dp))
                             LinearProgressIndicator(
                                 progress = { progress },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(8.dp)
-                                    .clip(RoundedCornerShape(4.dp)),
+                                    .height(6.dp)
+                                    .clip(CircleShape),
                                 color = EmeraldPrimary,
-                                trackColor = AtlasNavyBorder,
+                                trackColor = AtlasDarkNavy
                             )
                         }
                     }
                 }
             }
         }
-
-        // Category Filter Chips
-        item(key = "learn_filter_row") {
-            Row(
+        item(key = "learn_category_filters") {
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 10.dp),
+                    .padding(vertical = 8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                FilterChip(
-                    selected = selectedCategory == null,
-                    onClick = { onCategorySelected(null) },
-                    label = { Text("All Lessons ($totalLessons)") },
-                    shape = RoundedCornerShape(18.dp),
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = EmeraldPrimary,
-                        selectedLabelColor = AtlasDarkNavy
-                    )
-                )
-
-                LearnCategory.values().forEach { cat ->
-                    val isSelected = selectedCategory == cat
-                    val count = lessons.count { it.category == cat }
+                item(key = "all_topics") {
+                    val isSelected = selectedCategory == null
                     FilterChip(
                         selected = isSelected,
-                        onClick = { onCategorySelected(cat) },
-                        label = { Text("${cat.displayName} ($count)") },
-                        shape = RoundedCornerShape(18.dp),
+                        onClick = { onCategorySelected(null) },
+                        label = {
+                            Text(
+                                text = "All Topics",
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy
+                            selectedLabelColor = AtlasDarkNavy,
+                            containerColor = AtlasNavySurface,
+                            labelColor = TextSecondary
+                        ),
+                        shape = RoundedCornerShape(16.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSelected,
+                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
+                        )
+                    )
+                }
+
+                items(
+                    items = LearnCategory.entries,
+                    key = { it.name }
+                ) { category ->
+                    val isSelected = selectedCategory == category
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = { onCategorySelected(category) },
+                        label = {
+                            Text(
+                                text = category.displayName,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = EmeraldPrimary,
+                            selectedLabelColor = AtlasDarkNavy,
+                            containerColor = AtlasNavySurface,
+                            labelColor = TextSecondary
+                        ),
+                        shape = RoundedCornerShape(16.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSelected,
+                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
                         )
                     )
                 }
             }
         }
 
-        // Lesson list
         items(
             items = filteredLessons,
             key = { it.id }
         ) { lesson ->
             val isCompleted = completedIds.contains(lesson.id)
-            Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
-                LessonCard(
-                    lesson = lesson,
-                    isCompleted = isCompleted,
-                    onCardClick = { onLessonClick(lesson) },
-                    onToggleCompleted = { onToggleCompleted(lesson.id) }
-                )
-            }
-        }
-
-        item(key = "learn_bottom_spacer") {
-            Spacer(modifier = Modifier.height(80.dp))
-        }
-    }
-}
-
-@Composable
-fun LessonCard(
-    lesson: LearnLesson,
-    isCompleted: Boolean,
-    onCardClick: () -> Unit,
-    onToggleCompleted: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        onClick = onCardClick,
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
-        border = androidx.compose.foundation.BorderStroke(
-            1.dp,
-            if (isCompleted) EmeraldPrimary.copy(alpha = 0.5f) else AtlasNavyBorder
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .testTag("lesson_card_${lesson.id}")
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = if (isCompleted) EmeraldPrimary.copy(alpha = 0.5f) else AtlasNavyBorder
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .clickable { onLessonClick(lesson) }
+                    .testTag("lesson_card_${lesson.id}")
             ) {
-                // Category Tag
-                Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = EmeraldPrimary.copy(alpha = 0.15f)
-                ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = EmeraldPrimary.copy(alpha = 0.15f),
+                            modifier = Modifier.weight(1f, fill = false)
+                        ) {
+                            Text(
+                                text = lesson.category.displayName,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = EmeraldLight,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        IconButton(
+                            onClick = { onToggleCompleted(lesson.id) },
+                            modifier = Modifier.size(28.dp)
+                        ) {
+                            Icon(
+                                imageVector = if (isCompleted) Icons.Default.CheckCircle else Icons.Default.RadioButtonUnchecked,
+                                contentDescription = if (isCompleted) "Completed" else "Mark completed",
+                                tint = if (isCompleted) EmeraldPrimary else TextSecondary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
                     Text(
-                        text = lesson.category.displayName,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = EmeraldLight,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        text = lesson.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = TextPrimary
                     )
-                }
 
-                Spacer(modifier = Modifier.weight(1f))
+                    Spacer(modifier = Modifier.height(6.dp))
 
-                // Read time
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.AccessTime,
-                        contentDescription = null,
-                        tint = TextMuted,
-                        modifier = Modifier.size(14.dp)
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "${lesson.readTimeMinutes} min",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = TextSecondary
+                        text = lesson.summary,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = TextSecondary,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        lineHeight = 18.sp
                     )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.AccessTime,
+                            contentDescription = null,
+                            tint = EmeraldLight,
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "${lesson.readTimeMinutes} min read",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = EmeraldLight,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                // Complete toggle checkbox
-                IconButton(
-                    onClick = onToggleCompleted,
-                    modifier = Modifier.size(32.dp)
-                ) {
-                    Icon(
-                        imageVector = if (isCompleted) Icons.Default.CheckCircle else Icons.Default.RadioButtonUnchecked,
-                        contentDescription = if (isCompleted) "Mark uncompleted" else "Mark completed",
-                        tint = if (isCompleted) EmeraldPrimary else TextMuted
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = lesson.title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = TextPrimary
-            )
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            Text(
-                text = lesson.summary,
-                style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary,
-                lineHeight = 20.sp
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            // Action row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = if (isCompleted) "Completed ✓" else "Tap to read tutorial →",
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isCompleted) EmeraldLight else CyanNeon
-                )
             }
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LessonReaderBottomSheet(
@@ -390,25 +379,27 @@ fun LessonReaderBottomSheet(
                 .padding(bottom = 32.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            // Header with close
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = EmeraldPrimary.copy(alpha = 0.2f)
+                    color = EmeraldPrimary.copy(alpha = 0.2f),
+                    modifier = Modifier.weight(1f, fill = false)
                 ) {
                     Text(
                         text = lesson.category.displayName,
                         style = MaterialTheme.typography.labelSmall,
                         color = EmeraldLight,
                         fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.width(8.dp))
 
                 IconButton(onClick = onDismiss) {
                     Icon(
@@ -447,11 +438,10 @@ fun LessonReaderBottomSheet(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Key Takeaways callout
             Surface(
                 shape = RoundedCornerShape(12.dp),
                 color = AtlasDarkNavy,
-                border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                border = BorderStroke(1.dp, AtlasNavyBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
@@ -480,7 +470,6 @@ fun LessonReaderBottomSheet(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Full content markdown/plain paragraphs
             lesson.fullContent.split("\n\n").forEach { paragraph ->
                 if (paragraph.startsWith("# ")) {
                     Text(
@@ -511,7 +500,6 @@ fun LessonReaderBottomSheet(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Mark completed button
             Button(
                 onClick = {
                     onToggleCompleted()
