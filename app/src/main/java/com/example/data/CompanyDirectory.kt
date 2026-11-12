@@ -20,8 +20,6 @@ object CompanyDirectory {
         companies = defaultCompanies
         refreshFromGist()
     }
-}
-
 
     fun refreshFromGist() {
         CoroutineScope(Dispatchers.IO).launch {
