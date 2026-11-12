@@ -323,11 +323,12 @@ fun DirectoryFooterDisclaimer(modifier: Modifier = Modifier) {
             modifier = Modifier.testTag("footer_disclaimer")
         )
         Spacer(modifier = Modifier.height(6.dp))
-        Text(
-            text = "WorkAtlas • Philippines & Worldwide Remote Directory",
+                Text(
+            text = "WorkAtlas • Global AI & Remote Work Directory",
             style = MaterialTheme.typography.labelSmall,
             color = EmeraldLight,
             fontWeight = FontWeight.SemiBold
         )
+
     }
 }
