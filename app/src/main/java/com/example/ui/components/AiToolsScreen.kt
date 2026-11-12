@@ -94,8 +94,8 @@ fun AiToolsScreen(modifier: Modifier = Modifier) {
     // Resume Builder Form State
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var location by remember { mutableStateOf("Manila, Philippines (Open to Worldwide Remote)") }
-    var languages by remember { mutableStateOf("English (Fluent / Professional), Tagalog / Filipino (Native)") }
+    var location by remember { mutableStateOf("") }
+    var languages by remember { mutableStateOf("") }
     var selectedSkills by remember {
         mutableStateOf(
             setOf("AI Training & RLHF", "Prompt Evaluation", "Factuality & Verification", "Writing & Editing")
