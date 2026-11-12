@@ -250,18 +250,16 @@ fun SavedTrackerScreen(
                             text = "Explore the Jobs tab to save opportunities and update your application stage.",
                             style = MaterialTheme.typography.bodySmall,
                             color = TextSecondary,
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                        )
-                    }
+                   }
                 }
             }
-        }
+        } // <-- Keep ONLY this single closing brace for `if (filteredList.isEmpty())`
 
-        } else {
-            items(
-                items = filteredList,
-                key = { it.id }
-            ) { company ->
+        items(
+            items = filteredList,
+            key = { it.id }
+        ) { company ->
+
                 val currentStatus = statuses[company.id] ?: ApplicationStatus.SAVED
                 Card(
                     shape = RoundedCornerShape(16.dp),
