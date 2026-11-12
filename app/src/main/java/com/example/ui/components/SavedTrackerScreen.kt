@@ -2,10 +2,12 @@ package com.example.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AssignmentTurnedIn
@@ -48,6 +50,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.ApplicationStatus
@@ -62,6 +65,7 @@ import com.example.ui.theme.TextPrimary
 import com.example.ui.theme.TextSecondary
 import com.example.util.SavedJobsCsvExporter
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SavedTrackerScreen(
     bookmarkedCompanies: List<Company>,
@@ -72,6 +76,7 @@ fun SavedTrackerScreen(
     modifier: Modifier = Modifier
 ) {
     var selectedFilterStatus by remember { mutableStateOf<ApplicationStatus?>(null) }
+    val context = LocalContext.current
 
     val filteredList = if (selectedFilterStatus == null) {
         bookmarkedCompanies
@@ -83,15 +88,19 @@ fun SavedTrackerScreen(
         modifier = modifier
             .fillMaxSize()
             .background(AtlasDarkNavy)
-            .testTag("saved_tracker_screen")
+            .testTag("saved_tracker_screen"),
+        contentPadding = PaddingValues(bottom = 24.dp)
     ) {
-        item {
-            Box(
+        item(key = "tracker_header") {
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 12.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Box(
                         modifier = Modifier
                             .size(42.dp)
@@ -108,13 +117,20 @@ fun SavedTrackerScreen(
                     }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "Application Pipeline",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = TextPrimary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = "Application Pipeline Tracker",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary,
-                                modifier = Modifier.weight(1f, fill = false)
+                                text = "${bookmarkedCompanies.size} Saved",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = TextSecondary
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Surface(
@@ -132,16 +148,11 @@ fun SavedTrackerScreen(
                                 )
                             }
                         }
-                        Text(
-                            text = "${bookmarkedCompanies.size} Saved Opportunities • Local SQLite Synced",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = TextSecondary
-                        )
                     }
+                }
 
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    val context = LocalContext.current
+                if (bookmarkedCompanies.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(10.dp))
                     OutlinedButton(
                         onClick = {
                             SavedJobsCsvExporter.exportAndShareCsv(
@@ -156,7 +167,10 @@ fun SavedTrackerScreen(
                         ),
                         border = BorderStroke(1.dp, EmeraldPrimary.copy(alpha = 0.5f)),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.testTag("export_csv_btn")
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(38.dp)
+                            .testTag("export_csv_btn")
                     ) {
                         Icon(
                             imageVector = Icons.Default.FileDownload,
@@ -165,7 +179,7 @@ fun SavedTrackerScreen(
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "Export CSV",
+                            text = "Export Pipeline CSV",
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
                             maxLines = 1,
@@ -175,44 +189,81 @@ fun SavedTrackerScreen(
                 }
             }
         }
-        item {
-            Row(
+        item(key = "tracker_filter_row") {
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                    .padding(vertical = 8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                FilterChip(
-                    selected = selectedFilterStatus == null,
-                    onClick = { selectedFilterStatus = null },
-                    label = { Text("All (${bookmarkedCompanies.size})", maxLines = 1, softWrap = false) },
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = EmeraldPrimary,
-                        selectedLabelColor = AtlasDarkNavy
-                    ),
-                    shape = RoundedCornerShape(18.dp)
-                )
-
-                ApplicationStatus.values().forEach { st ->
-                    val count = bookmarkedCompanies.count { (statuses[it.id] ?: ApplicationStatus.SAVED) == st }
+                item(key = "filter_all") {
+                    val isSelected = selectedFilterStatus == null
                     FilterChip(
-                        selected = selectedFilterStatus == st,
-                        onClick = { selectedFilterStatus = st },
-                        label = { Text("${st.displayName} ($count)", maxLines = 1, softWrap = false) },
+                        selected = isSelected,
+                        onClick = { selectedFilterStatus = null },
+                        label = {
+                            Text(
+                                text = "All (${bookmarkedCompanies.size})",
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy
+                            selectedLabelColor = AtlasDarkNavy,
+                            containerColor = AtlasNavySurface,
+                            labelColor = TextSecondary
                         ),
-                        shape = RoundedCornerShape(18.dp)
+                        shape = RoundedCornerShape(18.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSelected,
+                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
+                        )
+                    )
+                }
+
+                items(
+                    items = ApplicationStatus.entries,
+                    key = { it.name }
+                ) { st ->
+                    val count = bookmarkedCompanies.count {
+                        (statuses[it.id] ?: ApplicationStatus.SAVED) == st
+                    }
+                    val isSelected = selectedFilterStatus == st
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = { selectedFilterStatus = st },
+                        label = {
+                            Text(
+                                text = "${st.displayName} ($count)",
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = EmeraldPrimary,
+                            selectedLabelColor = AtlasDarkNavy,
+                            containerColor = AtlasNavySurface,
+                            labelColor = TextSecondary
+                        ),
+                        shape = RoundedCornerShape(18.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSelected,
+                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
+                        )
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(6.dp))
         }
 
         if (filteredList.isEmpty()) {
-            item {
+            item(key = "empty_tracker_state") {
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
@@ -250,7 +301,8 @@ fun SavedTrackerScreen(
                     }
                 }
             }
-        } else {
+        }
+                } else {
             items(
                 items = filteredList,
                 key = { it.id }
@@ -294,13 +346,12 @@ fun SavedTrackerScreen(
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        FlowRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
-                            ApplicationStatus.values().forEach { statusOption ->
+                            ApplicationStatus.entries.forEach { statusOption ->
                                 val isSelected = currentStatus == statusOption
                                 FilterChip(
                                     selected = isSelected,
@@ -315,9 +366,16 @@ fun SavedTrackerScreen(
                                     },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = EmeraldPrimary,
-                                        selectedLabelColor = AtlasDarkNavy
+                                        selectedLabelColor = AtlasDarkNavy,
+                                        containerColor = AtlasDarkNavy,
+                                        labelColor = TextSecondary
                                     ),
-                                    shape = RoundedCornerShape(12.dp)
+                                    shape = RoundedCornerShape(12.dp),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSelected,
+                                        borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
+                                    )
                                 )
                             }
                         }
@@ -336,7 +394,9 @@ fun SavedTrackerScreen(
                             Text(
                                 text = "Open Application Portal",
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 13.sp
+                                fontSize = 13.sp,
+                                maxLines = 1,
+                                softWrap = false
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Icon(
@@ -351,3 +411,4 @@ fun SavedTrackerScreen(
         }
     }
 }
+
