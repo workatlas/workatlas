@@ -100,11 +100,11 @@ fun MainWorkAtlasScreen(
         }
     }
 
-    Scaffold(
+        Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .background(AtlasDarkNavy)
-            .windowInsetsPadding(WindowInsets.safeDrawing),
+            .background(AtlasDarkNavy),
+
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
                 BannerAdView()
