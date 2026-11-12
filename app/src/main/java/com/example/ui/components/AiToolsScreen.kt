@@ -136,19 +136,19 @@ fun AiToolsScreen(modifier: Modifier = Modifier) {
         "Computer Vision Bounding"
     )
 
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .background(AtlasDarkNavy)
-            .padding(horizontal = 16.dp)
-            .testTag("ai_tools_screen")
-    ) {
+   LazyColumn(
+    modifier = modifier
+        .fillMaxSize()
+        .background(AtlasDarkNavy)
+        .testTag("ai_tools_screen")
+) {
+
         // SECTION 1 HEADER: SMART RESUME BUILDER
         item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
@@ -567,12 +567,12 @@ OutlinedButton(
             }
         }
 
-        // SECTION 2 HEADER: CURATED AI LEARNING & PRODUCTIVITY TOOLS
+                // SECTION 2 HEADER: CURATED AI LEARNING & PRODUCTIVITY TOOLS
         item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 12.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
@@ -597,7 +597,7 @@ OutlinedButton(
                         )
                     }
                     Spacer(modifier = Modifier.width(12.dp))
-                    Column {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = "Curated AI Learning & Productivity Tools",
                             style = MaterialTheme.typography.titleLarge,
@@ -614,13 +614,13 @@ OutlinedButton(
             }
         }
 
-        // Category Filter Chips for Productivity Tools
+        // Category Filter Chips for Productivity Tools (scrolls edge-to-edge without clipping)
         item {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
-                    .padding(bottom = 12.dp),
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 ProductivityToolCategory.values().forEach { cat ->
@@ -628,7 +628,14 @@ OutlinedButton(
                     FilterChip(
                         selected = isSelected,
                         onClick = { selectedToolCategory = cat },
-                        label = { Text(cat.displayName, fontSize = 12.sp) },
+                        label = {
+                            Text(
+                                text = cat.displayName,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
                             selectedLabelColor = AtlasDarkNavy,
@@ -644,6 +651,7 @@ OutlinedButton(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         // List of Curated Tools with Ethical Guides
@@ -657,129 +665,5 @@ OutlinedButton(
                 border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 6.dp)
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = tool.name,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary
-                            )
-                            Text(
-                                text = "${tool.provider} • ${tool.category.displayName}",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = EmeraldLight
-                            )
-                        }
-
-                        Surface(
-                            shape = RoundedCornerShape(6.dp),
-                            color = EmeraldPrimary.copy(alpha = 0.2f)
-                        ) {
-                            Text(
-                                text = "FREE TIER",
-                                color = EmeraldPrimary,
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(
-                        text = tool.description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary,
-                        lineHeight = 20.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    // Ethical Use Callout
-                    Surface(
-                        shape = RoundedCornerShape(10.dp),
-                        color = AtlasDarkNavy,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(10.dp),
-                            verticalAlignment = Alignment.Top
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Security,
-                                contentDescription = null,
-                                tint = EmeraldLight,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Column {
-                                Text(
-                                    text = "Ethical Study & Workflow Tip:",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    fontWeight = FontWeight.Bold,
-                                    color = EmeraldLight
-                                )
-                                Spacer(modifier = Modifier.height(2.dp))
-                                Text(
-                                    text = tool.ethicalUseGuide,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = TextPrimary,
-                                    lineHeight = 17.sp
-                                )
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    Button(
-                        onClick = { CustomTabHelper.openCustomTab(context, tool.url) },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = AtlasNavyBorder,
-                            contentColor = CyanNeon
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.OpenInNew,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Open ${tool.name}",
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-            }
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(80.dp))
-        }
-    }
-}
-
-@Composable
-private fun outlinedFieldColors() = OutlinedTextFieldDefaults.colors(
-    focusedBorderColor = EmeraldPrimary,
-    unfocusedBorderColor = AtlasNavyBorder,
-    focusedContainerColor = AtlasDarkNavy,
-    unfocusedContainerColor = AtlasDarkNavy,
-    focusedTextColor = TextPrimary,
-    unfocusedTextColor = TextPrimary,
-    focusedLabelColor = EmeraldLight,
-    unfocusedLabelColor = TextMuted
-)
