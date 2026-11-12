@@ -91,7 +91,6 @@ Voice AI technologies (Siri, Alexa, Whisper, Gemini Live) require hundreds of th
 3. **P-Pops (Plosives)**: Speaking directly into the mic capsule without a pop filter or slight 45-degree off-axis angle.
             """.trimIndent()
         ),
-
         // Category 2: How to Pass Assessments & Interviews
         LearnLesson(
             id = "lesson_qualification_tests",
@@ -156,13 +155,13 @@ Avoid short 3-word answers. The speech recognition models evaluate your depth of
         // Category 3: Payout & Remote Work Setup
         LearnLesson(
             id = "lesson_payout_setup",
-            title = "Setting Up Wise, PayPal, Payoneer & Airtm in the Philippines & Worldwide",
+            title = "Setting Up Wise, PayPal, Payoneer & Airtm Worldwide",
             category = LearnCategory.REMOTE_SETUP,
             readTimeMinutes = 8,
-            summary = "A comprehensive guide on receiving USD/EUR freelance earnings, minimizing conversion fees, and linking local banks.",
+            summary = "A comprehensive guide on receiving USD/EUR freelance earnings, minimizing conversion fees, and linking local bank accounts.",
             keyTakeaways = listOf(
                 "Comparing payout fees: Wise vs. PayPal vs. Payoneer vs. Airtm",
-                "Linking Philippine banks (BDO, BPI, UnionBank, GCash) for instant transfers",
+                "Linking domestic bank accounts and debit cards for fast transfers",
                 "Tax identification (W-8BEN for US clients) and KYC verification checklist"
             ),
             fullContent = """
@@ -172,19 +171,19 @@ When working for US and international AI companies, selecting the right payout p
 
 ### 1. PayPal
 - **Used by**: DataAnnotation, Remotasks, Rev, OneForma, Prolific.
-- **Tip**: When withdrawing from PayPal to a Philippine bank or GCash, check whether you are converting at PayPal's internal rate or your bank's rate. Linking a Visa card or UnionBank/GCash often yields faster clearing.
+- **Tip**: When withdrawing from PayPal to a local bank account, check whether you are converting at PayPal's internal rate or your bank's rate. Linking an eligible Visa debit card or local bank account often yields faster clearing.
 
 ### 2. Wise (Formerly TransferWise)
 - **Used by**: micro1, Mercor, Turing, Pareto AI, Andovar.
-- **Benefit**: Best-in-class mid-market exchange rate with low transparent fees. You receive a personal US Routing Number and Account Number (ACH) allowing clients to pay you like a local US employee.
+- **Benefit**: Best-in-class mid-market exchange rate with low transparent fees. You receive a personal US Routing Number and Account Number (ACH) allowing clients to pay you like a local US contractor.
 
 ### 3. Payoneer
 - **Used by**: Appen, Clickworker, Toloka, Centific, Mindrift.
-- **Tip**: Payoneer provides multi-currency receiving accounts. You can transfer directly from Payoneer to GCash in the Philippines with instant confirmation.
+- **Tip**: Payoneer provides multi-currency receiving accounts. You can withdraw directly from Payoneer to your local bank account in your preferred currency.
 
 ### 4. Airtm
 - **Used by**: Outlier, Remotasks, SproutGigs, Microworkers.
-- **Benefit**: Excellent peer-to-peer dollar wallet widely favored across the Philippines, Latin America, and Southeast Asia. Allows easy cashout to e-wallets (GCash, Maya) and local banks.
+- **Benefit**: Peer-to-peer digital dollar wallet favored by international remote contractors. Allows flexible cashout to local bank accounts and supported regional payment methods.
 
 ### Form W-8BEN
 US clients require non-US residents to fill out IRS Form W-8BEN during onboarding. This certifies that you are a foreign contractor and exempts you from US federal tax withholding.
@@ -215,7 +214,7 @@ To maintain high earnings and prevent test disqualifications:
 Annotation tasks often require looking at guidelines, images, and tools simultaneously. Using an external second monitor increases annotation speed by up to 40%.
 
 ### 3. Internet Redundancy
-Keep a prepaid mobile data sim (GCash/Smart/Globe/DITO in the Philippines) as an instant hotspot backup. Disconnecting in the middle of a timed assessment can cause an automatic forfeit.
+Keep a prepaid mobile data plan or pocket Wi-Fi ready as an instant hotspot backup. Disconnecting in the middle of a timed assessment can cause an automatic forfeit.
             """.trimIndent()
         )
     )
