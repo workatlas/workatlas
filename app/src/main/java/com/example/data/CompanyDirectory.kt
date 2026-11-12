@@ -16,10 +16,12 @@ object CompanyDirectory {
   var companies: List<Company> by mutableStateOf(emptyList())
     private set
 
-init {
-    companies = defaultCompanies
-    refreshFromGist()
+    init {
+        companies = defaultCompanies
+        refreshFromGist()
+    }
 }
+
 
     fun refreshFromGist() {
         CoroutineScope(Dispatchers.IO).launch {
