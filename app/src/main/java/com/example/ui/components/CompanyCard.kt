@@ -72,28 +72,17 @@ fun CategoryFilterRow(
     onCategorySelected: (JobCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyRow(
-        modifier = modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(
-            items = JobCategory.entries,
-            key = { it.name }
-        ) { category ->
-            val isSelected = category == selectedCategory
-            FilterChip(
-                selected = isSelected,
-                onClick = { onCategorySelected(category) },
-                label = {
-                    Text(
-                        text = category.displayName,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                        fontSize = 12.sp,
-                        maxLines = 1,
-                        softWrap = false
-                    )
-                },
+    val options = JobCategory.entries.map { category ->
+        BentoFilterOption(value = category, label = category.displayName)
+    }
+    BentoFilterGrid(
+        options = options,
+        selectedValue = selectedCategory,
+        onSelect = onCategorySelected,
+        modifier = modifier
+    )
+}
+
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = EmeraldPrimary,
                     selectedLabelColor = AtlasDarkNavy,
