@@ -821,28 +821,18 @@ KEY REMOTE COMPETENCIES
         }
 
                // Category Filter Chips for Productivity Tools
-        item {
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(
-                    items = ProductivityToolCategory.values(),
-                    key = { it.name }
-                ) { cat ->
-                    val isSelected = selectedToolCategory == cat
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { selectedToolCategory = cat },
-                        label = {
-                            Text(
-                                text = cat.displayName,
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        },
+                item {
+            val options = ProductivityToolCategory.entries.map { cat ->
+                BentoFilterOption(value = cat, label = cat.displayName)
+            }
+            BentoFilterGrid(
+                options = options,
+                selectedValue = selectedToolCategory,
+                onSelect = { selectedToolCategory = it }
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+        }
+
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = EmeraldPrimary,
                             selectedLabelColor = AtlasDarkNavy,
