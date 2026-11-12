@@ -301,8 +301,7 @@ fun SavedTrackerScreen(
                     }
                 }
             }
-        }
-                } else {
+        } else {
             items(
                 items = filteredList,
                 key = { it.id }
@@ -411,4 +410,3 @@ fun SavedTrackerScreen(
         }
     }
 }
-
