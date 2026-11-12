@@ -615,8 +615,8 @@ KEY REMOTE COMPETENCIES
                     }
                 }
             }
-        }
-        // VOICE & AUDIO NARRATOR AUDITION PRACTICE CARD
+         }
+        } // VOICE & AUDIO NARRATOR AUDITION PRACTICE CARD
         item {
             val sampleScripts = listOf(
                 "Conversational Warmth: \"Hey there! Thanks for reaching out today. Let me walk you through two quick options so you can pick the one that fits your schedule best.\"",
