@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -76,20 +75,7 @@ class WorkAtlasViewModel(application: Application) : AndroidViewModel(applicatio
     private val _learnCategoryFilter = MutableStateFlow<com.example.data.LearnCategory?>(null)
     val learnCategoryFilter: StateFlow<com.example.data.LearnCategory?> = _learnCategoryFilter
 
-    init {
-        // Seed initial starter bookmarks on first app launch if local db is empty
-        viewModelScope.launch {
-            val existing = localRepository.bookmarkedJobsFlow.firstOrNull()
-            if (existing.isNullOrEmpty()) {
-                localRepository.saveBookmark(1, ApplicationStatus.APPLIED) // micro1
-                localRepository.saveBookmark(2, ApplicationStatus.ASSESSMENT) // Alignerr
-                localRepository.saveBookmark(10, ApplicationStatus.SAVED) // DataAnnotation
-                localRepository.saveBookmark(22, ApplicationStatus.INTERVIEW) // Mercor
-            }
-        }
-    }
-
-    val uiState: StateFlow<WorkAtlasUiState> = combine(
+        val uiState: StateFlow<WorkAtlasUiState> = combine(
         _currentTab,
         _searchQuery,
         _selectedCategory,
@@ -168,7 +154,6 @@ class WorkAtlasViewModel(application: Application) : AndroidViewModel(applicatio
             filteredCompanies = CompanyDirectory.companies
         )
     )
-
     fun selectTab(tab: AppNavTab) {
         _currentTab.value = tab
     }
@@ -267,3 +252,4 @@ class WorkAtlasViewModel(application: Application) : AndroidViewModel(applicatio
         _learnCategoryFilter.value = category
     }
 }
+
