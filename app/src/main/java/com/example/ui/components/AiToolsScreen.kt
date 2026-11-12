@@ -818,16 +818,17 @@ KEY REMOTE COMPETENCIES
             }
         }
 
-        // Category Filter Chips for Productivity Tools
+               // Category Filter Chips for Productivity Tools
         item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                ProductivityToolCategory.values().forEach { cat ->
+                items(
+                    items = ProductivityToolCategory.values(),
+                    key = { it.name }
+                ) { cat ->
                     val isSelected = selectedToolCategory == cat
                     FilterChip(
                         selected = isSelected,
@@ -857,6 +858,7 @@ KEY REMOTE COMPETENCIES
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
+
 
         // List of Curated Tools with Ethical Guides
         items(
