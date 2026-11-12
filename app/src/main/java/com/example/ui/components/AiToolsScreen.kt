@@ -523,51 +523,252 @@ KEY REMOTE COMPETENCIES
                                 }
                             }
                             Spacer(modifier = Modifier.height(10.dp))
-OutlinedButton(
-    onClick = {
-        val candidateName = fullName.ifBlank { "Remote Candidate" }
-        val skillsSummary = (selectedSkills + customSkillsInput.split(",").map { it.trim() })
-            .filter { it.isNotBlank() }
-            .joinToString(", ")
-            .ifBlank { "AI Training, Prompt Evaluation, and Data Annotation" }
-        val pitchText = """
-            Hi Hiring Team,
+                                                    OutlinedButton(
+                            onClick = {
+                                val candidateName = fullName.ifBlank { "Remote Candidate" }
+                                val skillsSummary = (selectedSkills + customSkillsInput.split(",").map { it.trim() })
+                                    .filter { it.isNotBlank() }
+                                    .joinToString(", ")
+                                    .ifBlank { "AI Training, Prompt Evaluation, and Data Annotation" }
+                                val pitchText = """
+                                    Hi Hiring Team,
 
-            My name is $candidateName, and I am applying for a remote AI & Data contributor role. I bring hands-on experience in $skillsSummary, with a strong focus on accuracy, clear communication, and following detailed quality guidelines.
+                                    My name is $candidateName, and I am applying for a remote AI & Data contributor role. I bring hands-on experience in $skillsSummary, with a strong focus on accuracy, clear communication, and following detailed quality guidelines.
 
-            I have a reliable high-speed setup and am ready to begin immediately. Thank you for reviewing my application!
-        """.trimIndent()
+                                    I have a reliable high-speed setup and am ready to begin immediately. Thank you for reviewing my application!
+                                """.trimIndent()
 
-        clipboardManager.setText(AnnotatedString(pitchText))
-        Toast.makeText(context, "Application pitch copied! Paste it into your job form.", Toast.LENGTH_SHORT).show()
-    },
-    shape = RoundedCornerShape(10.dp),
-    border = androidx.compose.foundation.BorderStroke(1.dp, EmeraldPrimary),
-    modifier = Modifier
-        .fillMaxWidth()
-        .height(44.dp)
-) {
-    Icon(
-        imageVector = Icons.Default.ContentCopy,
-        contentDescription = null,
-        tint = EmeraldPrimary,
-        modifier = Modifier.size(16.dp)
-    )
-    Spacer(modifier = Modifier.width(6.dp))
-    Text(
-        text = "Copy Application Pitch",
-        color = EmeraldPrimary,
-        fontWeight = FontWeight.SemiBold
-    )
-}
+                                clipboardManager.setText(AnnotatedString(pitchText))
+                                Toast.makeText(context, "Application pitch copied! Paste it into your job form.", Toast.LENGTH_SHORT).show()
+                            },
+                            shape = RoundedCornerShape(10.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, EmeraldPrimary),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(44.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ContentCopy,
+                                contentDescription = null,
+                                tint = EmeraldPrimary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Copy Application Pitch",
+                                color = EmeraldPrimary,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
 
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        OutlinedButton(
+                            onClick = {
+                                val candidateName = fullName.ifBlank { "Remote Candidate" }
+                                val candidateContact = email.ifBlank { "Available upon request" }
+                                val skillsSummary = (selectedSkills + customSkillsInput.split(",").map { it.trim() })
+                                    .filter { it.isNotBlank() }
+                                    .joinToString(", ")
+                                    .ifBlank { "AI Training, Prompt Evaluation, and Data Annotation" }
+                                val fullEmailText = """
+                                    Subject: Remote AI & Data Contributor Application - $candidateName
+
+                                    Dear Hiring Team,
+
+                                    I am writing to express my interest in remote contributor opportunities with your team. With practical background in $skillsSummary, I specialize in producing accurate, rubric-aligned evaluations and clear written rationales.
+
+                                    Highlights of my workflow:
+                                    • Strong attention to detail and strict adherence to project guidelines
+                                    • Reliable high-speed internet and quiet dedicated workspace
+                                    • Ready to complete onboarding assessments immediately
+
+                                    Thank you for your time and consideration. I look forward to the opportunity to contribute.
+
+                                    Best regards,
+                                    $candidateName
+                                    $candidateContact
+                                """.trimIndent()
+
+                                clipboardManager.setText(AnnotatedString(fullEmailText))
+                                Toast.makeText(context, "Full application email (Subject + Body) copied!", Toast.LENGTH_SHORT).show()
+                            },
+                            shape = RoundedCornerShape(10.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, CyanNeon.copy(alpha = 0.7f)),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(44.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ContentCopy,
+                                contentDescription = null,
+                                tint = CyanNeon,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Copy Full Application Email",
+                                color = CyanNeon,
+                                fontWeight = FontWeight.SemiBold
+                            )
                         }
                     }
                 }
             }
         }
+        // VOICE & AUDIO NARRATOR AUDITION PRACTICE CARD
+        item {
+            val sampleScripts = listOf(
+                "Conversational Warmth: \"Hey there! Thanks for reaching out today. Let me walk you through two quick options so you can pick the one that fits your schedule best.\"",
+                "Clear Technical Narration: \"When evaluating two AI responses, verify every factual claim independently before scoring helpfulness, tone, and instruction following.\"",
+                "Expressive Storytelling: \"Under a canopy of glowing stars, the explorer adjusted her compass, realizing the uncharted path ahead led straight to the summit.\""
+            )
+            var scriptIndex by remember { mutableStateOf(0) }
+            var isSpeaking by remember { mutableStateOf(false) }
 
-                // SECTION 2 HEADER: CURATED AI LEARNING & PRODUCTIVITY TOOLS
+            val ttsEngine = remember {
+                var engine: android.speech.tts.TextToSpeech? = null
+                engine = android.speech.tts.TextToSpeech(context) { status ->
+                    if (status == android.speech.tts.TextToSpeech.SUCCESS) {
+                        engine?.language = java.util.Locale.US
+                    }
+                }
+                engine
+            }
+
+            androidx.compose.runtime.DisposableEffect(Unit) {
+                onDispose {
+                    ttsEngine?.stop()
+                    ttsEngine?.shutdown()
+                }
+            }
+
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, EmeraldPrimary.copy(alpha = 0.45f)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.AutoAwesome,
+                            contentDescription = null,
+                            tint = EmeraldPrimary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Voice & Narrator Audition Practice",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = TextPrimary,
+                            modifier = Modifier.weight(1f, fill = false)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
+                            color = CyanNeon.copy(alpha = 0.15f)
+                        ) {
+                            Text(
+                                text = "VOICE PREP",
+                                color = CyanNeon,
+                                fontSize = 9.sp,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1,
+                                softWrap = false,
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = "Practice pacing and clarity for voice platforms (Babel Audio, AppTek) with sample scripts and reference audio.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = TextSecondary
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = AtlasDarkNavy,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = sampleScripts[scriptIndex],
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = TextPrimary,
+                            lineHeight = 20.sp,
+                            modifier = Modifier.padding(12.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        OutlinedButton(
+                            onClick = {
+                                ttsEngine?.stop()
+                                isSpeaking = false
+                                scriptIndex = (scriptIndex + 1) % sampleScripts.size
+                            },
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = "Next Script",
+                                color = TextPrimary,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
+
+                        Button(
+                            onClick = {
+                                if (isSpeaking) {
+                                    ttsEngine?.stop()
+                                    isSpeaking = false
+                                } else {
+                                    val spokenText = sampleScripts[scriptIndex].substringAfter(": ").trim('"')
+                                    ttsEngine?.speak(
+                                        spokenText,
+                                        android.speech.tts.TextToSpeech.QUEUE_FLUSH,
+                                        null,
+                                        "audition_sample"
+                                    )
+                                    isSpeaking = true
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = EmeraldPrimary,
+                                contentColor = AtlasDarkNavy
+                            ),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = if (isSpeaking) "Stop Reference" else "Listen Reference",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        // SECTION 2 HEADER: CURATED AI LEARNING & PRODUCTIVITY TOOLS
         item {
             Box(
                 modifier = Modifier
@@ -614,7 +815,7 @@ OutlinedButton(
             }
         }
 
-        // Category Filter Chips for Productivity Tools (scrolls edge-to-edge without clipping)
+        // Category Filter Chips for Productivity Tools
         item {
             Row(
                 modifier = Modifier
@@ -667,3 +868,126 @@ OutlinedButton(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = tool.name,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
+                            )
+                            Text(
+                                text = "${tool.provider} • ${tool.category.displayName}",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = EmeraldLight
+                            )
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
+                            color = EmeraldPrimary.copy(alpha = 0.2f)
+                        ) {
+                            Text(
+                                text = "FREE TIER",
+                                color = EmeraldPrimary,
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1,
+                                softWrap = false,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = tool.description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = TextSecondary,
+                        lineHeight = 20.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = AtlasDarkNavy,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, AtlasNavyBorder),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(10.dp),
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Security,
+                                contentDescription = null,
+                                tint = EmeraldLight,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                Text(
+                                    text = "Ethical Study & Workflow Tip:",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = EmeraldLight
+                                )
+                                Spacer(modifier = Modifier.height(2.dp))
+                                Text(
+                                    text = tool.ethicalUseGuide,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = TextPrimary,
+                                    lineHeight = 17.sp
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Button(
+                        onClick = { CustomTabHelper.openCustomTab(context, tool.url) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = AtlasNavyBorder,
+                            contentColor = CyanNeon
+                        ),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Open Official Tool",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Icon(
+                            imageVector = Icons.Default.OpenInNew,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun outlinedFieldColors() = OutlinedTextFieldDefaults.colors(
+    focusedBorderColor = EmeraldPrimary,
+    unfocusedBorderColor = AtlasNavyBorder,
+    focusedContainerColor = AtlasDarkNavy,
+    unfocusedContainerColor = AtlasDarkNavy,
+    focusedTextColor = TextPrimary,
+    unfocusedTextColor = TextPrimary,
+    focusedLabelColor = EmeraldLight,
+    unfocusedLabelColor = TextSecondary
+)
+
