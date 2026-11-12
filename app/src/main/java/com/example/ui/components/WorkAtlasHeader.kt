@@ -127,7 +127,7 @@ fun WorkAtlasHeader(
                                 modifier = Modifier.size(12.dp)
                             )
                             Text(
-                                text = "Philippines & Global AI Directory",
+                                text = "Global AI & Remote Work Directory",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = TextSecondary
                             )
