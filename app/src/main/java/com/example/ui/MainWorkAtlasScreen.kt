@@ -195,7 +195,8 @@ item(key = "header") {
                 .height(38.dp)
         ) {
             Icon(
-                imageVector = androidx.compose.material.icons.Icons.Default.Share,
+               imageVector = androidx.compose.material.icons.Icons.Default.Send,
+
                 contentDescription = null,
                 tint = EmeraldPrimary,
                 modifier = Modifier.size(16.dp)
@@ -402,7 +403,7 @@ item(key = "header") {
         )
     }
 
-    // Modal Daily Job Reminder Dialog
+      // Modal Daily Job Reminder Dialog
     DailyReminderDialog(
         isOpen = showReminderDialog,
         isReminderEnabled = uiState.isReminderEnabled,
@@ -412,38 +413,43 @@ item(key = "header") {
             viewModel.setDailyReminder(enabled, hour, minute)
         },
         onDismiss = { showReminderDialog = false }
-   if (showPrivacyDialog) {
-    androidx.compose.material3.AlertDialog(
-        onDismissRequest = { showPrivacyDialog = false },
-        containerColor = AtlasDarkNavy,
-        title = {
-            Text(
-                text = "Privacy Policy & Disclosure",
-                color = androidx.compose.ui.graphics.Color.White,
-                fontWeight = FontWeight.Bold
-            )
-        },
-        text = {
-            Text(
-                text = "WorkAtlas is a free global directory of remote work and AI training platforms.\n\n" +
-                    "• Local Data Only: Your saved jobs, resume inputs, and reminder preferences stay strictly on your device. We do not collect or sell personal accounts.\n" +
-                    "• Ads & Referrals: WorkAtlas displays Google AdMob ads to remain free. Some external company links include referral codes that help support app updates at zero cost to you.\n" +
-                    "• External Sites: Always verify job terms directly on each company's official career portal.",
-                color = androidx.compose.ui.graphics.Color(0xFFCBD5E1),
-                fontSize = 13.sp,
-                lineHeight = 18.sp
-            )
-        },
-        confirmButton = {
-            androidx.compose.material3.TextButton(
-                onClick = { showPrivacyDialog = false }
-            ) {
+    )
+
+    // Privacy Policy & Affiliate Disclosure Dialog
+    if (showPrivacyDialog) {
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { showPrivacyDialog = false },
+            containerColor = AtlasDarkNavy,
+            title = {
                 Text(
-                    text = "Got It",
-                    color = EmeraldPrimary,
+                    text = "Privacy Policy & Disclosure",
+                    color = androidx.compose.ui.graphics.Color.White,
                     fontWeight = FontWeight.Bold
                 )
+            },
+            text = {
+                Text(
+                    text = "WorkAtlas is a free global directory of remote work and AI training platforms.\n\n" +
+                        "• Local Data Only: Your saved jobs, resume inputs, and reminder preferences stay strictly on your device. We do not collect or sell personal accounts.\n" +
+                        "• Ads & Referrals: WorkAtlas displays Google AdMob ads to remain free. Some external company links include referral codes that help support app updates at zero cost to you.\n" +
+                        "• External Sites: Always verify job terms directly on each company's official career portal.",
+                    color = androidx.compose.ui.graphics.Color(0xFFCBD5E1),
+                    fontSize = 13.sp,
+                    lineHeight = 18.sp
+                )
+            },
+            confirmButton = {
+                androidx.compose.material3.TextButton(
+                    onClick = { showPrivacyDialog = false }
+                ) {
+                    Text(
+                        text = "Got It",
+                        color = EmeraldPrimary,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
-        }
-    )
+        )
+    }
 }
+
