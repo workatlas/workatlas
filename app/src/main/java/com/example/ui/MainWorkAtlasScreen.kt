@@ -195,7 +195,7 @@ item(key = "header") {
                 .height(38.dp)
         ) {
             Icon(
-               imageVector = androidx.compose.material.icons.Icons.Default.Email,
+              imageVector = androidx.compose.material.icons.Icons.Default.Add,
 
                 contentDescription = null,
                 tint = EmeraldPrimary,
