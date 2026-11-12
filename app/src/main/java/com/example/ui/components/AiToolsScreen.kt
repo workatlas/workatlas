@@ -606,7 +606,7 @@ KEY REMOTE COMPETENCIES
                                 modifier = Modifier.size(16.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text(
+                           Text(
                                 text = "Copy Full Application Email",
                                 color = CyanNeon,
                                 fontWeight = FontWeight.SemiBold
@@ -615,9 +615,12 @@ KEY REMOTE COMPETENCIES
                     }
                 }
             }
-         }
-        } // VOICE & AUDIO NARRATOR AUDITION PRACTICE CARD
+        }
+    } // 
+
+        // VOICE & AUDIO NARRATOR AUDITION PRACTICE CARD
         item {
+               
             val sampleScripts = listOf(
                 "Conversational Warmth: \"Hey there! Thanks for reaching out today. Let me walk you through two quick options so you can pick the one that fits your schedule best.\"",
                 "Clear Technical Narration: \"When evaluating two AI responses, verify every factual claim independently before scoring helpfulness, tone, and instruction following.\"",
