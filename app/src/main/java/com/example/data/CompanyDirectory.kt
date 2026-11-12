@@ -13,12 +13,13 @@ object CompanyDirectory {
     private const val LIVE_GIST_URL =
         "https://githubusercontent.com"
 
-    var companies: List<Company> by mutableStateOf(defaultCompanies)
-        private set
+  var companies: List<Company> by mutableStateOf(emptyList())
+    private set
 
-    init {
-        refreshFromGist()
-    }
+init {
+    companies = defaultCompanies
+    refreshFromGist()
+}
 
     fun refreshFromGist() {
         CoroutineScope(Dispatchers.IO).launch {
