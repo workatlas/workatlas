@@ -173,28 +173,32 @@ fun AiToolsScreen(modifier: Modifier = Modifier) {
                         )
                     }
                     Spacer(modifier = Modifier.width(12.dp))
-                    Column {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(
-                                text = "Smart Resume Builder",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Surface(
-                                shape = RoundedCornerShape(6.dp),
-                                color = EmeraldPrimary.copy(alpha = 0.2f)
-                            ) {
-                                Text(
-                                    text = "ATS OPTIMIZED",
-                                    color = EmeraldLight,
-                                    fontSize = 9.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
+                       Column(modifier = Modifier.weight(1f)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "Smart Resume Builder",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = TextPrimary,
+                modifier = Modifier.weight(1f, fill = false)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Surface(
+                shape = RoundedCornerShape(6.dp),
+                color = EmeraldPrimary.copy(alpha = 0.2f)
+            ) {
+                Text(
+                    text = "ATS OPTIMIZED",
+                    color = EmeraldLight,
+                    fontSize = 9.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    softWrap = false,
+                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                )
+            }
+        }
+
                         Text(
                             text = "Format details for micro1, Alignerr, and AnnoTara AI in seconds",
                             style = MaterialTheme.typography.labelSmall,
