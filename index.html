@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WorkAtlas — Remote AI & Data Jobs</title>
+  <title>WorkAtlas — Remote AI Jobs, Free Tools &amp; Career Hub</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -19,12 +19,12 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15, 23, 42, 0.97);
       border-bottom: 1px solid #1e293b;
-      padding: 12px 16px;
+      padding: 12px 16px 0 16px;
     }
     .container { max-width: 1024px; width: 100%; margin: 0 auto; }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; }
     .brand { display: flex; align-items: center; gap: 10px; }
     .logo-box {
       width: 34px; height: 34px; border-radius: 8px;
@@ -33,15 +33,28 @@
     }
     .brand-title { font-weight: 700; font-size: 18px; line-height: 1.1; }
     .brand-sub { font-size: 11px; color: #34d399; display: block; }
+    .main-nav {
+      display: flex; gap: 6px; overflow-x: auto; padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .main-nav::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      background: #1e293b; color: #cbd5e1; border: 1px solid #334155;
+      border-radius: 999px; padding: 7px 14px; font-size: 12px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: 0.15s;
+    }
+    .nav-tab.active { background: #2563eb; color: #fff; border-color: #3b82f6; }
+    .tab-panel { display: none; flex-direction: column; gap: 16px; }
+    .tab-panel.active { display: flex; }
     .btn-primary {
       background: #2563eb; color: #fff; border: none; border-radius: 10px;
       padding: 9px 14px; font-size: 12px; font-weight: 600; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;
     }
     .btn-primary:hover { background: #3b82f6; }
     .btn-light {
       background: #ffffff; color: #020617; border: none; border-radius: 10px;
-      padding: 10px 16px; font-size: 12px; font-weight: 700; cursor: pointer;
+      padding: 10px 16px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none;
     }
     .btn-secondary {
       background: #1e293b; color: #cbd5e1; border: 1px solid #334155;
@@ -64,11 +77,12 @@
     }
     .invite-banner h2 { font-size: 14px; font-weight: 700; color: #fff; }
     .invite-banner p { font-size: 12px; color: #cbd5e1; margin-top: 2px; }
-    .search-input {
+    .search-input, .form-input, .form-textarea, .form-select {
       width: 100%; background: #0f172a; border: 1px solid #334155;
-      border-radius: 12px; padding: 12px 14px; font-size: 14px; color: #fff; outline: none;
+      border-radius: 12px; padding: 11px 14px; font-size: 13px; color: #fff; outline: none;
+      font-family: inherit;
     }
-    .search-input:focus { border-color: #3b82f6; }
+    .search-input:focus, .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: #3b82f6; }
     .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .cat-btn {
       background: #1e293b; color: #cbd5e1; border: none; border-radius: 8px;
@@ -76,12 +90,12 @@
     }
     .cat-btn.active { background: #2563eb; color: #fff; }
     .stats-bar { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; }
-    .job-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px;
+    .grid-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 14px;
     }
     .card {
       background: #0f172a; border: 1px solid #1e293b; border-radius: 16px;
-      padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
     }
     .card.featured { border-color: rgba(59, 130, 246, 0.55); }
     .card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
@@ -90,14 +104,25 @@
       font-size: 10px; background: rgba(59, 130, 246, 0.2); color: #93c5fd;
       padding: 3px 8px; border-radius: 999px; font-weight: 600; white-space: nowrap;
     }
+    .badge-green { background: rgba(16, 185, 129, 0.18); color: #6ee7b7; }
     .job-title { font-size: 15px; font-weight: 700; color: #fff; margin: 6px 0; }
     .job-meta { font-size: 12px; color: #94a3b8; }
     .job-meta span { color: #e2e8f0; }
     .card-actions {
       display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid #1e293b;
     }
-    .card-actions .btn-primary { flex: 1; justify-content: center; }
-    footer { padding: 20px 16px; text-align: center; font-size: 11px; color: #64748b; }
+    .card-actions .btn-primary { flex: 1; }
+    .section-box {
+      background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 18px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .section-title { font-size: 16px; font-weight: 700; color: #fff; }
+    .section-desc { font-size: 12px; color: #94a3b8; }
+    .output-box {
+      background: #020617; border: 1px solid #334155; border-radius: 12px;
+      padding: 14px; font-size: 13px; color: #e2e8f0; white-space: pre-wrap; min-height: 140px;
+    }
+    footer { padding: 24px 16px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #0f172a; margin-top: 20px; }
     #toast {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
       background: #059669; color: #fff; font-size: 12px; font-weight: 600;
@@ -107,68 +132,292 @@
   </style>
 </head>
 <body>
+
   <header>
-    <div class="container header-inner">
-      <div class="brand">
-        <div class="logo-box">W</div>
-        <div>
-          <span class="brand-title">WorkAtlas</span>
-          <span class="brand-sub">Live Remote Job Feed</span>
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="logo-box">W</div>
+          <div>
+            <span class="brand-title">WorkAtlas</span>
+            <span class="brand-sub">Remote Jobs • Free Tools • AI Hub</span>
+          </div>
         </div>
+        <button onclick="shareApp()" class="btn-primary">Share App</button>
       </div>
-      <button onclick="shareApp()" class="btn-primary">
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-        </svg>
-        Share App
-      </button>
+
+      <!-- 5-Tab Navigation -->
+      <nav class="main-nav" id="mainNav">
+        <button class="nav-tab active" data-tab="tab-jobs">Live Jobs</button>
+        <button class="nav-tab" data-tab="tab-resume">Resume &amp; Email</button>
+        <button class="nav-tab" data-tab="tab-tools">AI &amp; Dev Tools</button>
+        <button class="nav-tab" data-tab="tab-learn">Learn &amp; AI News</button>
+        <button class="nav-tab" data-tab="tab-post">Post Job / Newsletter</button>
+      </nav>
     </div>
   </header>
 
-  <div id="toast">Link copied! Ready to paste and share.</div>
+  <div id="toast">Copied to clipboard!</div>
 
   <main class="container">
     <div id="ad-top" class="ad-box">
       Sponsored Ad Space (Insert AdSense / AdMob Banner Code Here)
     </div>
+    <!-- TAB 1: LIVE JOBS -->
+    <section id="tab-jobs" class="tab-panel active">
+      <div class="invite-banner">
+        <div>
+          <h2>Know someone looking for remote AI &amp; voice work?</h2>
+          <p>Share WorkAtlas with friends — zero login required, updated live daily.</p>
+        </div>
+        <button onclick="shareApp()" class="btn-light">Invite Friends</button>
+      </div>
 
-    <div class="invite-banner">
       <div>
-        <h2>Know someone looking for remote AI &amp; voice work?</h2>
-        <p>Share WorkAtlas with friends — zero login required, updated live daily.</p>
+        <input
+          id="searchInput"
+          type="text"
+          class="search-input"
+          placeholder="Search AI training, voice, data, annotation, company..."
+        />
+        <div class="filter-row" id="filterButtons">
+          <button data-cat="All" class="cat-btn active">All Jobs</button>
+          <button data-cat="Featured" class="cat-btn">Priority Partners</button>
+          <button data-cat="Data & AI Training" class="cat-btn">Data &amp; AI Training</button>
+          <button data-cat="Audio & Voice" class="cat-btn">Audio &amp; Voice</button>
+          <button data-cat="Saved" class="cat-btn">Saved (<span id="savedCount">0</span>)</button>
+        </div>
       </div>
-      <button onclick="shareApp()" class="btn-light">Invite Friends</button>
-    </div>
 
-    <div>
-      <input
-        id="searchInput"
-        type="text"
-        class="search-input"
-        placeholder="Search AI training, voice, data, annotation, company..."
-      />
-      <div class="filter-row" id="filterButtons">
-        <button data-cat="All" class="cat-btn active">All Jobs</button>
-        <button data-cat="Featured" class="cat-btn">Priority Partners</button>
-        <button data-cat="Data & AI Training" class="cat-btn">Data &amp; AI Training</button>
-        <button data-cat="Audio & Voice" class="cat-btn">Audio &amp; Voice</button>
-        <button data-cat="Saved" class="cat-btn">Saved (<span id="savedCount">0</span>)</button>
+      <div class="stats-bar">
+        <span id="jobStatus">Syncing live remote job feeds...</span>
+        <span id="jobTotal">0 listings</span>
       </div>
-    </div>
 
-    <div class="stats-bar">
-      <span id="jobStatus">Syncing live remote job feeds...</span>
-      <span id="jobTotal">0 listings</span>
-    </div>
+      <div id="jobGrid" class="grid-cards"></div>
+    </section>
 
-    <div id="jobGrid" class="job-grid"></div>
+    <!-- TAB 2: FREE RESUME, COVER LETTER & EMAIL GENERATOR -->
+    <section id="tab-resume" class="tab-panel">
+      <div class="section-box">
+        <h2 class="section-title">Free Instant Resume, Cover Letter &amp; Email Generator</h2>
+        <p class="section-desc">No account or subscription required. Fill in your details to generate ready-to-send applications tailored for remote AI, data annotation, and voice roles.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+          <input id="docName" type="text" class="form-input" placeholder="Your Full Name (e.g., Juan Dela Cruz)" />
+          <input id="docRole" type="text" class="form-input" placeholder="Target Role (e.g., AI Data Trainer / Voice Contributor)" />
+          <input id="docSkills" type="text" class="form-input" placeholder="Key Skills (e.g., English fluency, data labeling, coding)" />
+          <select id="docType" class="form-select">
+            <option value="resume">ATS-Friendly Remote Resume</option>
+            <option value="cover">Short Cover Letter / Bio</option>
+            <option value="followup">Recruiter Follow-Up Email</option>
+          </select>
+        </div>
+
+        <textarea id="docExp" rows="3" class="form-textarea" placeholder="Brief summary of past experience or equipment (e.g., 2 years customer support, quiet room, fast fiber internet, laptop with headset)..."></textarea>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button onclick="generateCareerDoc()" class="btn-primary">Generate Document</button>
+          <button onclick="copyCareerDoc()" class="btn-secondary">Copy Text</button>
+          <button onclick="downloadCareerDoc()" class="btn-secondary">Download .TXT</button>
+        </div>
+
+        <div id="docOutput" class="output-box">Your generated resume, cover letter, or follow-up email will appear here...</div>
+      </div>
+    </section>
+    <!-- TAB 3: AI, DEV & FREELANCE LAUNCHPAD -->
+    <section id="tab-tools" class="tab-panel">
+      <div class="section-box">
+        <h2 class="section-title">Free AI, App Building &amp; Freelance Launchpad</h2>
+        <p class="section-desc">Direct one-tap access to top AI assistants, app builders, hosting platforms, and design tools used by remote workers.</p>
+
+        <h3 style="font-size: 13px; color: #60a5fa; margin-top: 6px;">AI Assistants &amp; Research</h3>
+        <div class="grid-cards">
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Google Gemini</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Multimodal AI &amp; Writing Assistant</h4>
+              <p class="job-meta">Draft cover letters, summarize long guidelines, and check grammar fast.</p>
+            </div>
+            <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Gemini</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Claude AI</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Coding, Logic &amp; Long-Document AI</h4>
+              <p class="job-meta">Ideal for reviewing coding prompts, complex rubrics, and structured writing.</p>
+            </div>
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Claude</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">ChatGPT</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">General AI &amp; Brainstorming</h4>
+              <p class="job-meta">Practice mock interviews and test prompt evaluation examples.</p>
+            </div>
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open ChatGPT</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Perplexity AI</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Real-Time Cited Fact Checker</h4>
+              <p class="job-meta">Verify sources and check facts quickly during AI response evaluation tasks.</p>
+            </div>
+            <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Perplexity</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Grok</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Live Web &amp; Social Trend AI</h4>
+              <p class="job-meta">Track real-time news and current events for up-to-date AI training tasks.</p>
+            </div>
+            <a href="https://grok.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Grok</a>
+          </div>
+        </div>
+
+        <h3 style="font-size: 13px; color: #60a5fa; margin-top: 10px;">App Development &amp; Free Hosting</h3>
+        <div class="grid-cards">
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Google AI Studio</span><span class="badge badge-green">Free</span></div>
+              <h4 class="job-title">Build AI Apps &amp; Test Prompts</h4>
+              <p class="job-meta">Prototype AI tools and generate clean web apps with Gemini models.</p>
+            </div>
+            <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open AI Studio</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Google Antigravity</span><span class="badge badge-green">Free</span></div>
+              <h4 class="job-title">Agentic Code &amp; App Builder</h4>
+              <p class="job-meta">Build and iterate on software projects quickly with AI assistance.</p>
+            </div>
+            <a href="https://antigravity.google" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Antigravity</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">GitHub</span><span class="badge badge-green">Free Hosting</span></div>
+              <h4 class="job-title">Code Repositories &amp; GitHub Pages</h4>
+              <p class="job-meta">Host static websites for free and automate updates with GitHub Actions.</p>
+            </div>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open GitHub</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Vercel</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Instant Frontend Cloud Deployment</h4>
+              <p class="job-meta">Deploy web apps directly from GitHub with automatic SSL and global CDN.</p>
+            </div>
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Vercel</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Netlify</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Drag-and-Drop Web Hosting</h4>
+              <p class="job-meta">Publish HTML/JS sites in seconds with zero server setup.</p>
+            </div>
+            <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Netlify</a>
+          </div>
+
+          <div class="card">
+            <div>
+              <div class="card-top"><span class="company-name">Canva</span><span class="badge badge-green">Free Tier</span></div>
+              <h4 class="job-title">Resumes, Logos &amp; Social Graphics</h4>
+              <p class="job-meta">Design app icons, social banners, and visual resumes in minutes.</p>
+            </div>
+            <a href="https://canva.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Canva</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- TAB 4: LEARNING HUB & LIVE AI NEWS -->
+    <section id="tab-learn" class="tab-panel">
+      <div class="section-box">
+        <h2 class="section-title">Remote AI Assessment Prep &amp; Guides</h2>
+        <p class="section-desc">Quick, practical tips to pass onboarding tests on AI training, coding, and voice platforms.</p>
+        <div class="grid-cards">
+          <div class="card">
+            <div>
+              <span class="badge">AI Evaluation</span>
+              <h4 class="job-title">1. Always Read the Rubric Before Answering</h4>
+              <p class="job-meta">Platforms grade on instruction-following, safety, and truthfulness. Check every constraint in the prompt before rating a response.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div>
+              <span class="badge">Audio &amp; Voice</span>
+              <h4 class="job-title">2. Pass Microphone &amp; Quiet-Room Checks</h4>
+              <p class="job-meta">Turn off electric fans and AC during recordings, keep your mic 6 inches away, and speak naturally without reading like a robot.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div>
+              <span class="badge">Video &amp; AI Interviews</span>
+              <h4 class="job-title">3. Ace Automated AI Video Screenings</h4>
+              <p class="job-meta">Use a stable Chrome browser, good front lighting, and give clear 60-second examples of your attention to detail.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-box">
+        <div class="card-top">
+          <h2 class="section-title">Live AI &amp; Tech Industry News</h2>
+          <span class="badge badge-green">Auto-Updated</span>
+        </div>
+        <p class="section-desc">Latest headlines in Artificial Intelligence, LLMs, and remote tech work.</p>
+        <div id="newsGrid" class="grid-cards">
+          <p class="section-desc">Loading latest AI headlines...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: EMPLOYER JOB POSTING & NEWSLETTER -->
+    <section id="tab-post" class="tab-panel">
+      <div class="section-box">
+        <h2 class="section-title">For Employers &amp; Recruiters: Feature a Remote Role</h2>
+        <p class="section-desc">Reach thousands of vetted global AI trainers, annotators, voice contributors, and remote developers with a pinned Priority Partner listing.</p>
+        <div class="grid-cards">
+          <div class="card featured">
+            <div>
+              <span class="badge">30-Day Pinned Spotlight</span>
+              <h4 class="job-title">Featured Job Listing — $29 / month</h4>
+              <p class="job-meta">Top placement in the Live Jobs feed, Priority Partner badge, and direct link to your application page or referral portal.</p>
+            </div>
+            <a href="mailto:workatlas.jobs@://gmail.com:" class="btn-primary">Submit Job via Email</a>
+          </div>
+          <div class="card">
+            <div>
+              <span class="badge badge-green">Free Weekly Digest</span>
+              <h4 class="job-title">Get New Remote AI Jobs in Your Inbox</h4>
+              <p class="job-meta">Never miss newly opened AI annotation, audio recording, and remote tech projects.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input id="subEmail" type="email" class="form-input" placeholder="Enter your email address..." />
+              <button onclick="subscribeNewsletter()" class="btn-primary" style="white-space: nowrap;">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="container">
-    <div id="ad-bottom" class="ad-box" style="margin-bottom: 12px;">
+    <div id="ad-bottom" class="ad-box" style="margin-bottom: 16px;">
       Sponsored Ad Space (Insert Bottom Banner Code Here)
     </div>
-    <p>WorkAtlas — Free Zero-Login Remote AI &amp; Tech Job Aggregator</p>
+    <div style="max-width: 680px; margin: 0 auto 12px auto;">
+      <strong style="color: #e2e8f0; display: block; margin-bottom: 4px;">Our Mission — WorkAtlas</strong>
+      <p>WorkAtlas connects global remote talent with verified AI training, data annotation, voice, and tech opportunities—completely free, with zero login walls, built-in career tools, and direct access to modern AI platforms.</p>
+    </div>
+    <p>&copy; 2026 WorkAtlas. Affiliate &amp; Partner Disclosure: Some links may earn a referral commission at zero cost to applicants.</p>
   </footer>
   <script>
     let allJobs = [];
@@ -185,8 +434,18 @@
       const toast = document.getElementById("toast");
       toast.textContent = msg;
       toast.style.display = "block";
-      setTimeout(() => { toast.style.display = "none"; }, 2500);
+      setTimeout(() => { toast.style.display = "none"; }, 2600);
     }
+
+    document.querySelectorAll(".nav-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".nav-tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+        tab.classList.add("active");
+        const target = document.getElementById(tab.dataset.tab);
+        if (target) target.classList.add("active");
+      });
+    });
 
     async function shareLink(title, text, url) {
       if (navigator.share) {
@@ -208,8 +467,8 @@
     function shareApp() {
       const appUrl = window.location.href.split("?")[0];
       shareLink(
-        "WorkAtlas — Remote AI & Data Jobs",
-        "Check out WorkAtlas for live remote AI training, voice, and data jobs (no login required):",
+        "WorkAtlas — Remote AI Jobs & Free Career Tools",
+        "Check out WorkAtlas for live remote AI jobs, free resume builder, and AI tools (no login required):",
         appUrl
       );
     }
@@ -265,10 +524,9 @@
       }
     }
 
-    // Direct CORS-enabled Public ATS Feed (Works immediately in browser)
     async function loadPublicATSFeed() {
       try {
-        const res = await fetch("https://www.arbeitnow.com/api/job-board-api");
+        const res = await fetch("https://arbeitnow.com");
         if (!res.ok) return [];
         const json = await res.json();
         return (json.data || []).slice(0, 80).map(j => ({
@@ -285,7 +543,6 @@
         return [];
       }
     }
-
     function renderJobs() {
       const query = searchInput.value.toLowerCase().trim();
       const filtered = allJobs
@@ -351,15 +608,117 @@
 
     searchInput.addEventListener("input", renderJobs);
 
+    function generateCareerDoc() {
+      const name = document.getElementById("docName").value.trim() || "Applicant Name";
+      const role = document.getElementById("docRole").value.trim() || "Remote AI Data & Voice Contributor";
+      const skills = document.getElementById("docSkills").value.trim() || "Prompt Evaluation, Data Annotation, Audio Recording, Attention to Detail";
+      const exp = document.getElementById("docExp").value.trim() || "Experienced remote contributor with a quiet workspace, reliable high-speed internet, and strong analytical skills.";
+      const type = document.getElementById("docType").value;
+      const out = document.getElementById("docOutput");
+
+      if (type === "resume") {
+        out.textContent =
+`${name.toUpperCase()}
+Target Role: ${role} | Location: Remote (Global)
+
+PROFESSIONAL SUMMARY
+Detail-oriented ${role} skilled in ${skills}. Proven ability to follow complex annotation rubrics, evaluate AI model outputs for accuracy and safety, and meet strict quality benchmarks independently.
+
+CORE SKILLS
+• ${skills.split(",").map(s => s.trim()).join("\n• ")}
+
+EXPERIENCE & REMOTE READINESS
+• ${exp}
+• Consistently maintains high accuracy scores on quality audits and asynchronous task queues.`;
+      } else if (type === "cover") {
+        out.textContent =
+`Dear Hiring Team,
+
+I am excited to apply for the ${role} position. With strong capabilities in ${skills}, I specialize in delivering accurate, rubric-compliant work for remote AI and data teams.
+
+${exp}
+
+I am ready to begin onboarding assessments immediately and look forward to contributing to your project quality goals.
+
+Best regards,
+${name}`;
+      } else {
+        out.textContent =
+`Subject: Follow-Up on Application — ${role} (${name})
+
+Hello Hiring Team,
+
+I hope you are having a productive week. I recently submitted my application for the ${role} role and wanted to reaffirm my strong interest in joining your contributor network.
+
+With hands-on skills in ${skills}, I am fully equipped for immediate remote onboarding. Please let me know if any additional assessment steps are needed from my end.
+
+Thank you for your time and consideration,
+${name}`;
+      }
+      showToast("Document generated!");
+    }
+
+    async function copyCareerDoc() {
+      const text = document.getElementById("docOutput").textContent;
+      if (!text || text.startsWith("Your generated")) return;
+      await navigator.clipboard.writeText(text);
+      showToast("Copied to clipboard!");
+    }
+
+    function downloadCareerDoc() {
+      const text = document.getElementById("docOutput").textContent;
+      if (!text || text.startsWith("Your generated")) return;
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "WorkAtlas_Application.txt";
+      a.click();
+    }
+
+    async function loadAINews() {
+      const newsGrid = document.getElementById("newsGrid");
+      try {
+        const res = await fetch("https://algolia.com");
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        newsGrid.innerHTML = (data.hits || []).map(item => `
+          <div class="card">
+            <div>
+              <span class="badge badge-green">AI Industry Update</span>
+              <h4 class="job-title">${item.title}</h4>
+              <p class="job-meta">Published: <span>${new Date(item.created_at).toLocaleDateString()}</span></p>
+            </div>
+            <a href="${item.url || 'https://ycombinator.com' + item.objectID}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read Story</a>
+          </div>
+        `).join("");
+      } catch {
+        newsGrid.innerHTML = `<p class="section-desc">Check back shortly for live AI industry updates.</p>`;
+      }
+    }
+
+    function subscribeNewsletter() {
+      const emailInput = document.getElementById("subEmail");
+      const email = emailInput.value.trim();
+      if (!email || !email.includes("@")) {
+        showToast("Please enter a valid email address.");
+        return;
+      }
+      const subs = JSON.parse(localStorage.getItem("workatlas_subs") || "[]");
+      subs.push(email);
+      localStorage.setItem("workatlas_subs", JSON.stringify(subs));
+      emailInput.value = "";
+      showToast("Subscribed! You will receive weekly remote AI job alerts.");
+    }
+
     async function init() {
       updateSavedCounter();
+      loadAINews();
       const [referrals, localATS, publicATS] = await Promise.all([
         loadReferrals(),
         loadLocalATS(),
         loadPublicATSFeed()
       ]);
 
-      // Merge and remove duplicate IDs
       const seen = new Set();
       allJobs = [...referrals, ...localATS, ...publicATS].filter(job => {
         if (seen.has(job.id)) return false;
