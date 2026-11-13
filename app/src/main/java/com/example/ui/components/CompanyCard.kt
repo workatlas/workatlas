@@ -83,6 +83,7 @@ fun CategoryFilterRow(
     )
 }
 
+
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = EmeraldPrimary,
                     selectedLabelColor = AtlasDarkNavy,
