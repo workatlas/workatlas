@@ -240,14 +240,14 @@
     }
 
     function detectCategory(title) {
-      return /audio|voice|speech|linguist|transcri|support|customer|writer|editor/i.test(title)
+      return /audio|voice|speech|linguist|transcri|support|customer|writer|editor|content|community/i.test(title)
         ? "Audio & Voice"
         : "Data & AI Training";
     }
 
     async function loadReferrals() {
       try {
-        const res = await fetch("./referrals.json");
+        const res = await fetch(`./referrals.json?v=${Date.now()}`);
         if (!res.ok) return [];
         return await res.json();
       } catch {
@@ -255,117 +255,32 @@
       }
     }
 
-    // Public CORS-enabled Remote Job Feeds (Updates automatically)
-    async function loadRemotiveJobs() {
+    async function loadLocalATS() {
       try {
-        const res = await fetch("https://remotive.com");
+        const res = await fetch(`./ats-jobs.json?v=${Date.now()}`);
         if (!res.ok) return [];
-        const data = await res.json();
-        return (data.jobs || []).map(j => ({
-          id: `rem-${j.id}`,
+        return await res.json();
+      } catch {
+        return [];
+      }
+    }
+
+    // Direct CORS-enabled Public ATS Feed (Works immediately in browser)
+    async function loadPublicATSFeed() {
+      try {
+        const res = await fetch("https://www.arbeitnow.com/api/job-board-api");
+        if (!res.ok) return [];
+        const json = await res.json();
+        return (json.data || []).slice(0, 80).map(j => ({
+          id: `arb-${j.slug}`,
           company: j.company_name,
           title: j.title,
-          category: detectCategory(j.title + " " + j.category),
-          pay: j.salary || "Remote / Competitive",
-          location: j.candidate_required_location || "Worldwide / Remote",
+          category: detectCategory(j.title + " " + (j.tags || []).join(" ")),
+          pay: j.remote ? "Remote / Competitive" : "Competitive",
+          location: j.remote ? `Remote (${j.location})` : j.location,
           url: j.url,
           featured: false
         }));
-      } catch {
-        return [];
-      }
-    }
-
-    async function loadJobicyJobs() {
-      try {
-        const res = await fetch("https://jobicy.com");
-        if (!res.ok) return [];
-        const data = await res.json();
-        return (data.jobs || []).map(j => ({
-          id: `jcy-${j.id}`,
-          company: j.companyName,
-          title: j.jobTitle,
-          category: detectCategory(j.jobTitle),
-          pay: j.annualSalaryMin ? `$${j.annualSalaryMin} - $${j.annualSalaryMax}/yr` : "Remote / Competitive",
-          location: j.jobGeo || "Anywhere / Remote",
-          url: j.url,
-          featured: false
-        }));
-      } catch {
-        return [];
-      }
-    }
-
-    function renderJobs() {
-      const query = searchInput.value.toLowerCase().trim();
-      const filtered = allJobs
-        .map((job, idx) => ({ ...job, _idx: idx }))
-        .filter(job => {
-          const matchesCat =
-            activeCategory === "All" ? true :
-            activeCategory === "Featured" ? job.featured :
-            activeCategory === "Saved" ? savedIds.includes(job.id) :
-            job.category === activeCategory;
-
-          const matchesSearch =
-            !query ||
-            job.title.toLowerCase().includes(query) ||
-            job.company.toLowerCase().includes(query) ||
-            job.location.toLowerCase().includes(query);
-
-          return matchesCat && matchesSearch;
-        });
-
-      jobTotal.textContent = `${filtered.length} listings`;
-
-      if (filtered.length === 0) {
-        jobGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: #94a3b8; font-size: 14px;">No matching jobs found. Try clearing your search or switching tabs.</div>`;
-        return;
-      }
-
-      jobGrid.innerHTML = filtered.map(job => {
-        const isSaved = savedIds.includes(job.id);
-        return `
-          <div class="card ${job.featured ? 'featured' : ''}">
-            <div>
-              <div class="card-top">
-                <span class="company-name">${job.company}</span>
-                ${job.featured ? '<span class="badge">Priority Partner</span>' : ''}
-              </div>
-              <h3 class="job-title">${job.title}</h3>
-              <div class="job-meta">
-                <p>Pay: <span>${job.pay}</span></p>
-                <p>Location: <span>${job.location}</span></p>
-              </div>
-            </div>
-            <div class="card-actions">
-              <a href="${job.url}" target="_blank" rel="noopener noreferrer" class="btn-primary">Apply Now</a>
-              <button onclick="shareSingleJob(${job._idx})" class="btn-secondary">Share</button>
-              <button onclick="toggleSave('${job.id}')" class="btn-secondary ${isSaved ? 'btn-saved' : ''}">
-                ${isSaved ? 'Saved' : 'Save'}
-              </button>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    document.querySelectorAll(".cat-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeCategory = btn.dataset.cat;
-        renderJobs();
-      });
-    });
-
-    searchInput.addEventListener("input", renderJobs);
-
-    async function loadATSJobs() {
-      try {
-        const res = await fetch("./ats-jobs.json");
-        if (!res.ok) return [];
-        return await res.json();
       } catch {
         return [];
       }
@@ -438,11 +353,20 @@
 
     async function init() {
       updateSavedCounter();
-      const [referrals, atsJobs] = await Promise.all([
+      const [referrals, localATS, publicATS] = await Promise.all([
         loadReferrals(),
-        loadATSJobs()
+        loadLocalATS(),
+        loadPublicATSFeed()
       ]);
-      allJobs = [...referrals, ...atsJobs];
+
+      // Merge and remove duplicate IDs
+      const seen = new Set();
+      allJobs = [...referrals, ...localATS, ...publicATS].filter(job => {
+        if (seen.has(job.id)) return false;
+        seen.add(job.id);
+        return true;
+      });
+
       jobStatus.textContent = "Updated live from Partner & Multi-ATS Feeds";
       renderJobs();
     }
@@ -451,4 +375,3 @@
   </script>
 </body>
 </html>
-
