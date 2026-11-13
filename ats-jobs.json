@@ -333,90 +333,90 @@
     "id": "dir-snorkel",
     "company": "Snorkel AI",
     "title": "Subject Matter Expert — AI Data Curation",
-"category": "Data & AI Training",
-"pay": "$30 - $80 / hr",
-"location": "Remote",
-"url": "snorkel.ai",
-"featured": false
-},
-{
-"id": "dir-surgeai",
-"company": "Surge AI",
-"title": "RLHF Data Trainer & Creative Writing Evaluator",
-"category": "Data & AI Training",
-"pay": "$20 - $50 / hr",
-"location": "Remote",
-"url": "surgehq.ai",
-"featured": false
-},
-{
-"id": "dir-pareto",
-"company": "Pareto AI",
-"title": "AI Data Labeling & Research Operations",
-"category": "Data & AI Training",
-"pay": "$15 - $35 / hr",
-"location": "Global / Remote",
-"url": "pareto.ai",
-"featured": false
-},
-{
-"id": "dir-upwork-ai",
-"company": "Upwork AI Talent Hub",
-"title": "Freelance Prompt Engineer, Data Annotator & Voice Actor",
-"category": "Data & AI Training",
-"pay": "Hourly / Fixed Contract",
-"location": "Global / Remote",
-"url": "upwork.com",
-"featured": false
-},
-{
-"id": "dir-prolific",
-"company": "Prolific",
-"title": "AI Model Feedback & Research Study Participant",
-"category": "Data & AI Training",
-"pay": "$8 - $18+ / hr",
-"location": "Global / Remote",
-"url": "prolific.com",
-"featured": false
-},
-{
-"id": "dir-usertesting",
-"company": "UserTesting",
-"title": "Website, App & AI Prototype Voice Reviewer",
-"category": "Audio & Voice",
-"pay": "$10 per 20-min test",
-"location": "Global / Remote",
-"url": "usertesting.com",
-"featured": false
-},
-{
-"id": "dir-testio",
-"company": "Test IO (EPAM)",
-"title": "Freelance App & Website QA Tester",
-"category": "Data & AI Training",
-"pay": "Per Bug / Test Cycle",
-"location": "Global / Remote",
-"url": "test.io",
-"featured": false
-},
-{
-"id": "dir-utest",
-"company": "uTest (Applause)",
-"title": "AI Usability, Voice & Functional Software Tester",
-"category": "Audio & Voice",
-"pay": "Project / Payout Based",
-"location": "Global / Remote",
-"url": "utest.com",
-"featured": false
-},
-{
-"id": "dir-datadog-remote",
-"company": "Remote.co AI & Tech Board",
-"title": "Curated Worldwide Remote Customer & AI Operations",
-"category": "Data & AI Training",
-"pay": "Competitive / Remote",
-"location": "Worldwide / Remote",
-"url": "remote.co",
-"featured": false
-}
+    "category": "Data & AI Training",
+    "pay": "$30 - $80 / hr",
+    "location": "Remote",
+    "url": "snorkel.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-surgeai",
+    "company": "Surge AI",
+    "title": "RLHF Data Trainer & Creative Writing Evaluator",
+    "category": "Data & AI Training",
+    "pay": "$20 - $50 / hr",
+    "location": "Remote",
+    "url": "surgehq.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-pareto",
+    "company": "Pareto AI",
+    "title": "AI Data Labeling & Research Operations",
+    "category": "Data & AI Training",
+    "pay": "$15 - $35 / hr",
+    "location": "Global / Remote",
+    "url": "pareto.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-upwork-ai",
+    "company": "Upwork AI Talent Hub",
+    "title": "Freelance Prompt Engineer, Data Annotator & Voice Actor",
+    "category": "Data & AI Training",
+    "pay": "Hourly / Fixed Contract",
+    "location": "Global / Remote",
+    "url": "upwork.com",
+    "featured": false
+  },
+  {
+    "id": "dir-prolific",
+    "company": "Prolific",
+    "title": "AI Model Feedback & Research Study Participant",
+    "category": "Data & AI Training",
+    "pay": "$8 - $18+ / hr",
+    "location": "Global / Remote",
+    "url": "prolific.com",
+    "featured": false
+  },
+  {
+    "id": "dir-usertesting",
+    "company": "UserTesting",
+    "title": "Website, App & AI Prototype Voice Reviewer",
+    "category": "Audio & Voice",
+    "pay": "$10 per 20-min test",
+    "location": "Global / Remote",
+    "url": "usertesting.com",
+    "featured": false
+  },
+  {
+    "id": "dir-testio",
+    "company": "Test IO (EPAM)",
+    "title": "Freelance App & Website QA Tester",
+    "category": "Data & AI Training",
+    "pay": "Per Bug / Test Cycle",
+    "location": "Global / Remote",
+    "url": "test.io",
+    "featured": false
+  },
+  {
+    "id": "dir-utest",
+    "company": "uTest (Applause)",
+    "title": "AI Usability, Voice & Functional Software Tester",
+    "category": "Audio & Voice",
+    "pay": "Project / Payout Based",
+    "location": "Global / Remote",
+    "url": "utest.com",
+    "featured": false
+  },
+  {
+    "id": "dir-datadog-remote",
+    "company": "Remote.co AI & Tech Board",
+    "title": "Curated Worldwide Remote Customer & AI Operations",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Worldwide / Remote",
+    "url": "remote.co",
+    "featured": false
+  }
 ]
