@@ -732,26 +732,28 @@ ${name}`;
       }
     }
 
-    async function loadAINews() {
+     async function loadAINews() {
       const newsGrid = document.getElementById("newsGrid");
       try {
-        const res = await fetch("https://algolia.com");
+        const res = await fetch(`./ai-news.json?v=${Date.now()}`);
         if (!res.ok) throw new Error();
-        const data = await res.json();
-        newsGrid.innerHTML = (data.hits || []).map(item => `
+        const items = await res.json();
+        if (!items.length) throw new Error();
+        newsGrid.innerHTML = items.map(item => `
           <div class="card">
             <div>
               <span class="badge badge-green">AI Industry Update</span>
               <h4 class="job-title">${item.title}</h4>
-              <p class="job-meta">Published: <span>${new Date(item.created_at).toLocaleDateString()}</span></p>
+              <p class="job-meta">Published: <span>${new Date(item.date).toLocaleDateString()}</span></p>
             </div>
-            <a href="${item.url || 'https://ycombinator.com' + item.objectID}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read Story</a>
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read Story</a>
           </div>
         `).join("");
       } catch {
         newsGrid.innerHTML = `<p class="section-desc">Check back shortly for live AI industry updates.</p>`;
       }
     }
+
 
     function subscribeNewsletter() {
       const emailInput = document.getElementById("subEmail");
