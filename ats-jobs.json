@@ -1416,7 +1416,7 @@
     "category": "AI & Tech Operations",
     "pay": "Competitive / Remote",
     "location": "Remote",
-    "url": "sightmachine.com",
+    "url": "https://sightmachine.com",
     "featured": false
   },
   {
@@ -1426,7 +1426,7 @@
     "category": "Robotics & Hardware AI",
     "pay": "Competitive / Remote",
     "location": "Remote / Hybrid",
-    "url": "covariant.ai",
+    "url": "https://covariant.ai/",
     "featured": false
   },
   {
@@ -1436,7 +1436,7 @@
     "category": "Robotics & Hardware AI",
     "pay": "Competitive / Remote",
     "location": "Remote / Hybrid",
-    "url": "righthandrobotics.com",
+    "url": "https://righthandrobotics.com/careers",
     "featured": false
   }
 ]
