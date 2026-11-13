@@ -418,9 +418,8 @@
     "location": "Worldwide / Remote",
     "url": "remote.co",
     "featured": false
-   }, 
-   {   
-
+  },
+  {
     "id": "dir-openai",
     "company": "OpenAI",
     "title": "AI Research, Model Safety & Operations Roles",
@@ -428,36 +427,6 @@
     "pay": "Competitive / Remote",
     "location": "Remote / Hybrid",
     "url": "https://openai.com",
-    "featured": false
-  },
-  {
-    "id": "dir-anthropic",
-    "company": "Anthropic",
-    "title": "AI Alignment, Safety & Policy Specialists",
-    "category": "AI Engineering & Dev",
-    "pay": "Competitive / Remote",
-    "location": "Remote / Hybrid",
-    "url": "https://anthropic.com",
-    "featured": false
-  },
-  {
-    "id": "dir-cohere",
-    "company": "Cohere",
-    "title": "Enterprise LLM Engineer & Data Operations",
-    "category": "AI Engineering & Dev",
-    "pay": "Competitive / Remote",
-    "location": "Global / Remote",
-    "url": "https://cohere.com",
-    "featured": false
-  },
-  {
-    "id": "dir-mistral",
-    "company": "Mistral AI",
-    "title": "Open-Weight LLM Research & AI Infrastructure",
-    "category": "AI Engineering & Dev",
-    "pay": "Competitive / Remote",
-    "location": "Remote / Europe",
-    "url": "https://mistral.ai",
     "featured": false
   },
   {
@@ -769,9 +738,9 @@
     "location": "Global / Remote",
     "url": "smartling.com",
     "featured": false
-   },
-   {
-         "id": "dir-cursor",
+  },
+  {
+    "id": "dir-cursor",
     "company": "Cursor (Anysphere)",
     "title": "AI Code Editor Research & Engineering Roles",
     "category": "AI Engineering & Dev",
@@ -1119,9 +1088,8 @@
     "location": "Remote / Hybrid",
     "url": "coreweave.com",
     "featured": false
- },
- {
-     
+  },
+  {
     "id": "dir-figure-ai",
     "company": "Figure AI",
     "title": "Humanoid Robotics AI & Teleoperation Data Specialist",
@@ -1442,35 +1410,33 @@
     "featured": false
   },
   {
-   "id": "dir-sight-machine",
-   "company": "Sight Machine",
-   "title": "Manufacturing AI & Industrial Data Operations",
-   "category": "AI & Tech Operations",
-   "pay": "Competitive / Remote",
-   "location": "Remote",
-   "url": "sightmachine.com",
-   "featured": false
-},
-{
-   "id": "dir-covariant",
-   "company": "Covariant",
-   "title": "Warehouse Robotics Foundation Model & Vision Roles",
-   "category": "Robotics & Hardware AI",
-   "pay": "Competitive / Remote",
-   "location": "Remote / Hybrid",
-   "url": "covariant.ai",
-   "featured": false
-},
-{
-   "id": "dir-righthand-robotics",
-   "company": "RightHand Robotics",
-   "title": "Autonomous Picking & Robotics ML Software Roles",
-   "category": "Robotics & Hardware AI",
-   "pay": "Competitive / Remote",
-   "location": "Remote / Hybrid",
-   "url": "righthandrobotics.com",
-   "featured": false
-}
+    "id": "dir-sight-machine",
+    "company": "Sight Machine",
+    "title": "Manufacturing AI & Industrial Data Operations",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "sightmachine.com",
+    "featured": false
+  },
+  {
+    "id": "dir-covariant",
+    "company": "Covariant",
+    "title": "Warehouse Robotics Foundation Model & Vision Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "covariant.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-righthand-robotics",
+    "company": "RightHand Robotics",
+    "title": "Autonomous Picking & Robotics ML Software Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "righthandrobotics.com",
+    "featured": false
+  }
 ]
-  
-    
