@@ -184,12 +184,14 @@ fun LearnScreen(
                                     .clip(CircleShape),
                                 color = EmeraldPrimary,
                                 trackColor = AtlasDarkNavy
-                            )
+                                                     )
                         }
                     }
                 }
             }
-        }        item(key = "learn_category_filters") {
+        }
+
+        item(key = "learn_category_filters") {
             val options = listOf(
                 BentoFilterOption<LearnCategory?>(value = null, label = "All Topics")
             ) + LearnCategory.entries.map { category ->
@@ -202,67 +204,10 @@ fun LearnScreen(
             )
         }
 
-
-                item(key = "all_topics") {
-                    val isSelected = selectedCategory == null
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { onCategorySelected(null) },
-                        label = {
-                            Text(
-                                text = "All Topics",
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
-                            containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
-                        ),
-                        shape = RoundedCornerShape(16.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                        )
-                    )
-                }
-
-                items(
-                    items = LearnCategory.entries,
-                    key = { it.name }
-                ) { category ->
-                    val isSelected = selectedCategory == category
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { onCategorySelected(category) },
-                        label = {
-                            Text(
-                                text = category.displayName,
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
-                            containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
-                        ),
-                        shape = RoundedCornerShape(16.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                        )
-                    )
-                }
-            }
-        }
+        items(
+            items = filteredLessons,
+            key = { it.id }
+        ) { lesson ->
 
         items(
             items = filteredLessons,
