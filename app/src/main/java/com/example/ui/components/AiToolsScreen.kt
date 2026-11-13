@@ -774,54 +774,8 @@ KEY REMOTE COMPETENCIES
             }
         }
         // SECTION 2 HEADER: CURATED AI LEARNING & PRODUCTIVITY TOOLS
+               // Category Filter Grid for Productivity Tools
         item {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp)
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        modifier = Modifier
-                            .size(42.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .background(
-                                Brush.linearGradient(
-                                    colors = listOf(
-                                        CyanNeon.copy(alpha = 0.3f),
-                                        EmeraldPrimary.copy(alpha = 0.2f)
-                                    )
-                                )
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Psychology,
-                            contentDescription = null,
-                            tint = CyanNeon,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = "Curated AI Learning & Productivity Tools",
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = TextPrimary
-                        )
-                        Text(
-                            text = "Free study aids, guidelines analyzers, and ethical usage rules",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = TextSecondary
-                        )
-                    }
-                }
-            }
-        }
-
-               // Category Filter Chips for Productivity Tools
-                item {
             val options = ProductivityToolCategory.entries.map { cat ->
                 BentoFilterOption(value = cat, label = cat.displayName)
             }
@@ -832,25 +786,6 @@ KEY REMOTE COMPETENCIES
             )
             Spacer(modifier = Modifier.height(6.dp))
         }
-
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
-                            containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
-                        ),
-                        shape = RoundedCornerShape(16.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                        )
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-
 
         // List of Curated Tools with Ethical Guides
         items(
