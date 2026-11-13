@@ -1,1 +1,119 @@
-[]
+name: Auto-Sync Public ATS Jobs
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch 100+ Remote Jobs and Live AI News
+        run: |
+          node -e '
+          const fs = require("fs");
+
+          const getCat = (txt) => /audio|voice|speech|linguist|transcri|support|writer|editor|content|community/i.test(txt)
+            ? "Audio & Voice"
+            : "Data & AI Training";
+
+          async function run() {
+            let jobs = [];
+
+            // 1. Arbeitnow Public ATS Feed (100 jobs)
+            try {
+              const r = await fetch("https://arbeitnow.com");
+              if (r.ok) {
+                const d = await r.json();
+                const items = (d.data || []).slice(0, 70).map(j => ({
+                  id: `arb-${j.slug}`,
+                  company: j.company_name,
+                  title: j.title,
+                  category: getCat(j.title + " " + (j.tags || []).join(" ")),
+                  pay: j.remote ? "Remote / Competitive" : "Competitive",
+                  location: j.remote ? `Remote (${j.location})` : j.location,
+                  url: j.url,
+                  featured: false
+                }));
+                jobs.push(...items);
+              }
+            } catch (e) {}
+
+            // 2. Remotive Remote Jobs
+            try {
+              const r = await fetch("https://remotive.com");
+              if (r.ok) {
+                const d = await r.json();
+                const items = (d.jobs || []).map(j => ({
+                  id: `rem-${j.id}`,
+                  company: j.company_name,
+                  title: j.title,
+                  category: getCat(j.title + " " + j.category),
+                  pay: j.salary || "Remote / Competitive",
+                  location: j.candidate_required_location || "Worldwide / Remote",
+                  url: j.url,
+                  featured: false
+                }));
+                jobs.push(...items);
+              }
+            } catch (e) {}
+
+            // 3. Greenhouse AI Boards
+            const ghBoards = [
+              { name: "Scale AI", slug: "scaleai" },
+              { name: "Invisible Technologies", slug: "invisibletechnologies" },
+              { name: "Labelbox", slug: "labelbox" },
+              { name: "Runway", slug: "runwayml" }
+            ];
+            for (const b of ghBoards) {
+              try {
+                const r = await fetch(`https://greenhouse.io{b.slug}/jobs`);
+                if (!r.ok) continue;
+                const d = await r.json();
+                const items = (d.jobs || []).slice(0, 12).map(j => ({
+                  id: `gh-${b.slug}-${j.id}`,
+                  company: b.name,
+                  title: j.title,
+                  category: getCat(j.title),
+                  pay: "Competitive / Global",
+                  location: j.location?.name || "Remote",
+                  url: j.absolute_url,
+                  featured: false
+                }));
+                jobs.push(...items);
+              } catch (e) {}
+            }
+
+            fs.writeFileSync("ats-jobs.json", JSON.stringify(jobs, null, 2));
+            console.log("Saved jobs:", jobs.length);
+
+            // 4. Fetch Live AI News
+            try {
+              const nr = await fetch("https://algolia.com");
+              if (nr.ok) {
+                const nd = await nr.json();
+                const news = (nd.hits || []).map(h => ({
+                  title: h.title,
+                  url: h.url || `https://ycombinator.com{h.objectID}`,
+                  date: h.created_at
+                }));
+                fs.writeFileSync("ai-news.json", JSON.stringify(news, null, 2));
+                console.log("Saved news:", news.length);
+              }
+            } catch (e) {}
+          }
+          run();
+          '
+
+      - name: Commit Updated Jobs and News
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@://github.com"
+          git add ats-jobs.json ai-news.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update 100+ ATS jobs and AI news" && git push)
