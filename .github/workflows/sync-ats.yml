@@ -24,7 +24,8 @@ jobs:
             { name: "Invisible Technologies", slug: "invisibletechnologies" },
             { name: "Toloka", slug: "toloka" },
             { name: "Labelbox", slug: "labelbox" },
-            { name: "Runway", slug: "runwayml" }
+            { name: "Runway", slug: "runwayml" },
+            { name: "Snorkel AI", slug: "snorkelai" }
           ];
 
           const LEVER_BOARDS = [
@@ -37,8 +38,9 @@ jobs:
             { name: "Hugging Face", slug: "huggingface" }
           ];
 
-          const isRelevant = (txt) => /remote|data|ai|annotat|train|audio|voice|evaluat|linguist|label|prompt|model|content|quality|support/i.test(txt);
-          const getCat = (txt) => /audio|voice|speech|linguist|transcri|support|writer/i.test(txt) ? "Audio & Voice" : "Data & AI Training";
+          const getCat = (txt) => /audio|voice|speech|linguist|transcri|support|writer|content|community/i.test(txt)
+            ? "Audio & Voice"
+            : "Data & AI Training";
 
           async function run() {
             let jobs = [];
@@ -46,20 +48,19 @@ jobs:
             for (const b of GH_BOARDS) {
               try {
                 const r = await fetch(`https://greenhouse.io{b.slug}/jobs`);
+                if (!r.ok) continue;
                 const d = await r.json();
-                const items = (d.jobs || [])
-                  .filter(j => isRelevant(j.title + " " + (j.location?.name || "")))
-                  .slice(0, 20)
-                  .map(j => ({
-                    id: `gh-${b.slug}-${j.id}`,
-                    company: b.name,
-                    title: j.title,
-                    category: getCat(j.title),
-                    pay: "Competitive / Remote",
-                    location: j.location?.name || "Remote",
-                    url: j.absolute_url,
-                    featured: false
-                  }));
+                const items = (d.jobs || []).slice(0, 15).map(j => ({
+                  id: `gh-${b.slug}-${j.id}`,
+                  company: b.name,
+                  title: j.title,
+                  category: getCat(j.title),
+                  pay: "Competitive / Global",
+                  location: j.location?.name || "Remote / Global",
+                  url: j.absolute_url,
+                  featured: false
+                }));
+                console.log(b.name, items.length);
                 jobs.push(...items);
               } catch (e) {}
             }
@@ -67,20 +68,19 @@ jobs:
             for (const b of LEVER_BOARDS) {
               try {
                 const r = await fetch(`https://lever.co{b.slug}?mode=json`);
+                if (!r.ok) continue;
                 const d = await r.json();
-                const items = (d || [])
-                  .filter(j => isRelevant(j.text + " " + (j.categories?.location || "")))
-                  .slice(0, 20)
-                  .map(j => ({
-                    id: `lv-${b.slug}-${j.id}`,
-                    company: b.name,
-                    title: j.text,
-                    category: getCat(j.text),
-                    pay: "Competitive / Remote",
-                    location: j.categories?.location || "Remote",
-                    url: j.hostedUrl,
-                    featured: false
-                  }));
+                const items = (d || []).slice(0, 15).map(j => ({
+                  id: `lv-${b.slug}-${j.id}`,
+                  company: b.name,
+                  title: j.text,
+                  category: getCat(j.text),
+                  pay: "Competitive / Global",
+                  location: j.categories?.location || "Remote / Global",
+                  url: j.hostedUrl,
+                  featured: false
+                }));
+                console.log(b.name, items.length);
                 jobs.push(...items);
               } catch (e) {}
             }
@@ -88,26 +88,25 @@ jobs:
             for (const b of ASHBY_BOARDS) {
               try {
                 const r = await fetch(`https://ashbyhq.com{b.slug}`);
+                if (!r.ok) continue;
                 const d = await r.json();
-                const items = (d.jobs || [])
-                  .filter(j => isRelevant(j.title + " " + (j.location || "")))
-                  .slice(0, 20)
-                  .map(j => ({
-                    id: `ash-${b.slug}-${j.id}`,
-                    company: b.name,
-                    title: j.title,
-                    category: getCat(j.title),
-                    pay: "Competitive / Remote",
-                    location: j.location || "Remote",
-                    url: j.jobUrl,
-                    featured: false
-                  }));
+                const items = (d.jobs || []).slice(0, 15).map(j => ({
+                  id: `ash-${b.slug}-${j.id}`,
+                  company: b.name,
+                  title: j.title,
+                  category: getCat(j.title),
+                  pay: "Competitive / Global",
+                  location: j.location || "Remote / Global",
+                  url: j.jobUrl,
+                  featured: false
+                }));
+                console.log(b.name, items.length);
                 jobs.push(...items);
               } catch (e) {}
             }
 
             fs.writeFileSync("ats-jobs.json", JSON.stringify(jobs, null, 2));
-            console.log("Saved jobs:", jobs.length);
+            console.log("TOTAL SAVED:", jobs.length);
           }
           run();
           '
