@@ -191,7 +191,7 @@ fun LearnScreen(
             }
         }
 
-        item(key = "learn_category_filters") {
+               item(key = "learn_category_filters") {
             val options = listOf(
                 BentoFilterOption<LearnCategory?>(value = null, label = "All Topics")
             ) + LearnCategory.entries.map { category ->
@@ -209,104 +209,8 @@ fun LearnScreen(
             key = { it.id }
         ) { lesson ->
 
-        items(
-            items = filteredLessons,
-            key = { it.id }
-        ) { lesson ->
-            val isCompleted = completedIds.contains(lesson.id)
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = AtlasNavySurface),
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = if (isCompleted) EmeraldPrimary.copy(alpha = 0.5f) else AtlasNavyBorder
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 6.dp)
-                    .clickable { onLessonClick(lesson) }
-                    .testTag("lesson_card_${lesson.id}")
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = EmeraldPrimary.copy(alpha = 0.15f),
-                            modifier = Modifier.weight(1f, fill = false)
-                        ) {
-                            Text(
-                                text = lesson.category.displayName,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = EmeraldLight,
-                                fontWeight = FontWeight.Bold,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        IconButton(
-                            onClick = { onToggleCompleted(lesson.id) },
-                            modifier = Modifier.size(28.dp)
-                        ) {
-                            Icon(
-                                imageVector = if (isCompleted) Icons.Default.CheckCircle else Icons.Default.RadioButtonUnchecked,
-                                contentDescription = if (isCompleted) "Completed" else "Mark completed",
-                                tint = if (isCompleted) EmeraldPrimary else TextSecondary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = lesson.title,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = TextPrimary
-                    )
-
-                    Spacer(modifier = Modifier.height(6.dp))
-
-                    Text(
-                        text = lesson.summary,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        lineHeight = 18.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Default.AccessTime,
-                            contentDescription = null,
-                            tint = EmeraldLight,
-                            modifier = Modifier.size(14.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = "${lesson.readTimeMinutes} min read",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = EmeraldLight,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
 @OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun LessonReaderBottomSheet(
     lesson: LearnLesson,
