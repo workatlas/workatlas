@@ -419,4 +419,1058 @@
     "url": "remote.co",
     "featured": false
   }
+  {
+  {
+    "id": "dir-openai",
+    "company": "OpenAI",
+    "title": "AI Research, Model Safety & Operations Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://openai.com",
+    "featured": false
+  },
+  {
+    "id": "dir-anthropic",
+    "company": "Anthropic",
+    "title": "AI Alignment, Safety & Policy Specialists",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://anthropic.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cohere",
+    "company": "Cohere",
+    "title": "Enterprise LLM Engineer & Data Operations",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://cohere.com",
+    "featured": false
+  },
+  {
+    "id": "dir-mistral",
+    "company": "Mistral AI",
+    "title": "Open-Weight LLM Research & AI Infrastructure",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Europe",
+    "url": "https://mistral.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-xai",
+    "company": "xAI",
+    "title": "AI Tutor, STEM Specialist & Model Evaluator",
+    "category": "Data & AI Training",
+    "pay": "$35 - $65 / hr",
+    "location": "Remote",
+    "url": "https://x.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-elevenlabs",
+    "company": "ElevenLabs",
+    "title": "Voice Actor, Audio Data & Speech AI Specialist",
+    "category": "Audio & Voice",
+    "pay": "Royalty / Contract",
+    "location": "Global / Remote",
+    "url": "https://elevenlabs.io",
+    "featured": false
+  },
+  {
+    "id": "dir-deepgram",
+    "company": "Deepgram",
+    "title": "Speech-to-Text AI & Audio Linguistic Specialist",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://deepgram.com",
+    "featured": false
+  },
+  {
+    "id": "dir-assemblyai",
+    "company": "AssemblyAI",
+    "title": "Speech Recognition Research & AI Data Analyst",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://assemblyai.com",
+    "featured": false
+  },
+  {
+    "id": "dir-murf-ai",
+    "company": "Murf AI",
+    "title": "Voiceover Artist & Synthetic Speech Evaluator",
+    "category": "Audio & Voice",
+    "pay": "Project / Contract",
+    "location": "Global / Remote",
+    "url": "https://murf.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-resemble-ai",
+    "company": "Resemble AI",
+    "title": "Generative Voice & Audio Deepfake Detection Analyst",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://resemble.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-descript",
+    "company": "Descript",
+    "title": "AI Audio/Video Editing & Transcription Product Roles",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://descript.com",
+    "featured": false
+  },
+  {
+    "id": "dir-midjourney",
+    "company": "Midjourney",
+    "title": "Generative Image Research & Moderator Roles",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://midjourney.com",
+    "featured": false
+  },
+  {
+    "id": "dir-stability-ai",
+    "company": "Stability AI",
+    "title": "Open Multimodal AI Research & Dataset Curation",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://stability.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-synthesia",
+    "company": "Synthesia",
+    "title": "AI Video Avatar & Multilingual Localization Specialist",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://synthesia.io",
+    "featured": false
+  },
+  {
+    "id": "dir-heygen",
+    "company": "HeyGen",
+    "title": "Generative Video & AI Translation Operations",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://heygen.com",
+    "featured": false
+  },
+  {
+    "id": "dir-pika-art",
+    "company": "Pika",
+    "title": "AI Video Generation & Creative Model Evaluation",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://pika.art",
+    "featured": false
+  },
+  {
+    "id": "dir-luma-ai",
+    "company": "Luma AI",
+    "title": "3D Vision, Video AI & Multimodal Data Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://lumalabs.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-together-ai",
+    "company": "Together AI",
+    "title": "Open-Source AI Cloud & Distributed Systems Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://together.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-anyscale",
+    "company": "Anyscale",
+    "title": "Scalable AI Compute & Ray Platform Engineering",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://anyscale.com",
+    "featured": false
+  },
+  {
+    "id": "dir-replicate",
+    "company": "Replicate",
+    "title": "Machine Learning API & Developer Relations Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://replicate.com",
+    "featured": false
+  },
+  {
+    "id": "dir-modal-labs",
+    "company": "Modal",
+    "title": "Cloud AI Infrastructure & Serverless GPU Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://modal.com",
+    "featured": false
+  },
+  {
+    "id": "dir-weights-biases",
+    "company": "Weights & Biases",
+    "title": "MLOps Developer Advocate & AI Solutions Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://wandb.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-pinecone",
+    "company": "Pinecone",
+    "title": "Vector Database & AI Search Infrastructure Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://pinecone.io",
+    "featured": false
+  },
+  {
+    "id": "dir-weaviate",
+    "company": "Weaviate",
+    "title": "Open-Source AI Vector Search & Developer Experience",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://weaviate.io",
+    "featured": false
+  },
+  {
+    "id": "dir-langchain",
+    "company": "LangChain",
+    "title": "AI Agent Framework & LLM Evaluation Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://langchain.com",
+    "featured": false
+  },
+  {
+    "id": "dir-llamaindex",
+    "company": "LlamaIndex",
+    "title": "RAG Data Framework & Enterprise AI Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://llamaindex.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-glean",
+    "company": "Glean",
+    "title": "Enterprise AI Search & Knowledge Graph Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://glean.com",
+    "featured": false
+  },
+  {
+    "id": "dir-writer-ai",
+    "company": "Writer",
+    "title": "Enterprise Generative AI & Computational Linguist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://writer.com",
+    "featured": false
+  },
+  {
+    "id": "dir-jasper-ai",
+    "company": "Jasper",
+    "title": "AI Content Marketing & Prompt Workflow Specialist",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://jasper.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-copy-ai",
+    "company": "Copy.ai",
+    "title": "GTM AI Workflow & Automation Operations",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://copy.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-grammarly",
+    "company": "Grammarly",
+    "title": "AI Writing Assistant & Analytical Linguist Roles",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://grammarly.com",
+    "featured": false
+  },
+  {
+    "id": "dir-quillbot",
+    "company": "QuillBot",
+    "title": "NLP Language Specialist & AI Product Operations",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://quillbot.com",
+    "featured": false
+  },
+  {
+    "id": "dir-deepl",
+    "company": "DeepL",
+    "title": "Neural Machine Translation & Linguistic Quality Rater",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Europe",
+    "url": "https://deepl.com",
+    "featured": false
+  },
+  {
+    "id": "dir-unbabel",
+    "company": "Unbabel",
+    "title": "AI-Powered Translation Editor & Bilingual Reviewer",
+    "category": "Data & AI Training",
+    "pay": "$10 - $25 / hr",
+    "location": "Global / Remote",
+    "url": "https://unbabel.com",
+    "featured": false
+  },
+  {
+    "id": "dir-smartling",
+    "company": "Smartling",
+    "title": "AI Localization & Freelance Linguist Contributor",
+    "category": "Data & AI Training",
+    "pay": "Project / Word Rate",
+    "location": "Global / Remote",
+    "url": "smartling.com",
+    "featured": false
+   },
+   {
+         "id": "dir-cursor",
+    "company": "Cursor (Anysphere)",
+    "title": "AI Code Editor Research & Engineering Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://cursor.com",
+    "featured": false
+  },
+  {
+    "id": "dir-windsurf",
+    "company": "Windsurf (Codeium)",
+    "title": "Agentic IDE & AI Developer Tools Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://windsurf.com",
+    "featured": false
+  },
+  {
+    "id": "dir-replit",
+    "company": "Replit",
+    "title": "AI Coding Agent & Cloud Dev Environment Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://replit.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cognition",
+    "company": "Cognition (Devin)",
+    "title": "Autonomous AI Software Engineering Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://cognition.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-tabnine",
+    "company": "Tabnine",
+    "title": "Enterprise AI Code Assistant & ML Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://tabnine.com",
+    "featured": false
+  },
+  {
+    "id": "dir-sourcegraph",
+    "company": "Sourcegraph (Cody)",
+    "title": "AI Code Search & Developer Context Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://sourcegraph.com",
+    "featured": false
+  },
+  {
+    "id": "dir-databricks",
+    "company": "Databricks",
+    "title": "Data Intelligence, Mosaic AI & Cloud Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://databricks.com",
+    "featured": false
+  },
+  {
+    "id": "dir-snowflake",
+    "company": "Snowflake",
+    "title": "AI Data Cloud & Cortex ML Engineering Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://snowflake.com",
+    "featured": false
+  },
+  {
+    "id": "dir-abridge",
+    "company": "Abridge",
+    "title": "Clinical AI Conversation & Healthcare Data Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://abridge.com",
+    "featured": false
+  },
+  {
+    "id": "dir-harvey",
+    "company": "Harvey AI",
+    "title": "Legal AI Domain Specialist & Prompt Evaluator",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://harvey.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-sierra",
+    "company": "Sierra",
+    "title": "Conversational AI Agent & Customer Experience Roles",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://sierra.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-decagon",
+    "company": "Decagon",
+    "title": "Enterprise AI Support Agent & Operations Engineer",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://decagon.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-ada",
+    "company": "Ada",
+    "title": "AI Customer Service Automation & Conversation Designer",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://ada.cx",
+    "featured": false
+  },
+  {
+    "id": "dir-intercom",
+    "company": "Intercom (Fin AI)",
+    "title": "AI Agent Operations & Technical Support Roles",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://intercom.com",
+    "featured": false
+  },
+  {
+    "id": "dir-kore-ai",
+    "company": "Kore.ai",
+    "title": "Enterprise Conversational AI & NLP Linguist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://kore.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-moveworks",
+    "company": "Moveworks",
+    "title": "Workplace AI Copilot & Enterprise ML Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://moveworks.com",
+    "featured": false
+  },
+  {
+    "id": "dir-aisera",
+    "company": "Aisera",
+    "title": "Agentic AI Domain Specialist & Data Annotator",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://aisera.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cresta",
+    "company": "Cresta",
+    "title": "Real-Time Contact Center AI & Conversation Analyst",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://cresta.com",
+    "featured": false
+  },
+  {
+    "id": "dir-observe-ai",
+    "company": "Observe.AI",
+    "title": "Voice AI Transcription & Contact Center Evaluator",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://observe.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-gong",
+    "company": "Gong",
+    "title": "Revenue Intelligence AI & Speech Data Scientist",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://gong.io",
+    "featured": false
+  },
+  {
+    "id": "dir-otter-ai",
+    "company": "Otter.ai",
+    "title": "AI Meeting Transcription & Speech Recognition Roles",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://otter.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-fireflies-ai",
+    "company": "Fireflies.ai",
+    "title": "Voice AI Notetaker & Remote Product Operations",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://fireflies.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-krisp",
+    "company": "Krisp",
+    "title": "AI Voice Cancellation & Audio Engineering Roles",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://krisp.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-soundhound",
+    "company": "SoundHound AI",
+    "title": "Voice AI Linguist & Speech Recognition Tester",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://soundhound.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cerence",
+    "company": "Cerence",
+    "title": "Automotive Voice Assistant & Multilingual Linguist",
+    "category": "Audio & Voice",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://cerence.com",
+    "featured": false
+  },
+  {
+    "id": "dir-character-ai",
+    "company": "Character.AI",
+    "title": "Conversational AI Character & Safety Evaluator",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://character.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-inflection-ai",
+    "company": "Inflection AI",
+    "title": "Personal AI Research & Model Alignment Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://inflection.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-adept-ai",
+    "company": "Adept",
+    "title": "Action-Model AI & Web Workflow Data Trainer",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://adept.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-imbue",
+    "company": "Imbue",
+    "title": "AI Reasoning Agents & Evaluation Research Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://imbue.com",
+    "featured": false
+  },
+  {
+    "id": "dir-groq",
+    "company": "Groq",
+    "title": "High-Speed AI Inference & LPU Systems Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://groq.com",
+    "featured": false
+  },
+  {
+    "id": "dir-fireworks-ai",
+    "company": "Fireworks AI",
+    "title": "Generative AI Inference Cloud & Solutions Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://fireworks.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-baseten",
+    "company": "Baseten",
+    "title": "ML Model Deployment & Infrastructure Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://baseten.co",
+    "featured": false
+  },
+  {
+    "id": "dir-runpod",
+    "company": "RunPod",
+    "title": "Distributed GPU Cloud & AI Developer Advocate",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://runpod.io",
+    "featured": false
+  },
+  {
+    "id": "dir-vast-ai",
+    "company": "Vast.ai",
+    "title": "GPU Marketplace & AI Infrastructure Operations",
+    "category": "AI & Tech Operations",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://vast.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-coreweave",
+    "company": "CoreWeave",
+    "title": "AI Hyperscaler Cloud & Data Center Operations",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "coreweave.com",
+    "featured": false
+ },
+ {
+     {
+    "id": "dir-figure-ai",
+    "company": "Figure AI",
+    "title": "Humanoid Robotics AI & Teleoperation Data Specialist",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://figure.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-boston-dynamics",
+    "company": "Boston Dynamics",
+    "title": "Robotics AI Perception & Controls Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://bostondynamics.com",
+    "featured": false
+  },
+  {
+    "id": "dir-1x-tech",
+    "company": "1X Technologies",
+    "title": "Embodied AI & Robotics Data Collection Operator",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://1x.tech",
+    "featured": false
+  },
+  {
+    "id": "dir-sanctuary-ai",
+    "company": "Sanctuary AI",
+    "title": "Cognitive Architecture & Robotics Teleoperation Specialist",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://sanctuary.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-agility-robotics",
+    "company": "Agility Robotics",
+    "title": "Legged Robotics Simulation & AI Software Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://agilityrobotics.com",
+    "featured": false
+  },
+  {
+    "id": "dir-physical-intelligence",
+    "company": "Physical Intelligence",
+    "title": "Robotics Foundation Model & Data Operations",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://physicalintelligence.company",
+    "featured": false
+  },
+  {
+    "id": "dir-skydio",
+    "company": "Skydio",
+    "title": "Autonomous Drone AI & Computer Vision Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://skydio.com",
+    "featured": false
+  },
+  {
+    "id": "dir-shield-ai",
+    "company": "Shield AI",
+    "title": "Autonomous Pilot AI & Reinforcement Learning Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://shield.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-anduril",
+    "company": "Anduril Industries",
+    "title": "Autonomous Systems AI & Sensor Fusion Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://anduril.com",
+    "featured": false
+  },
+  {
+    "id": "dir-palantir",
+    "company": "Palantir Technologies",
+    "title": "AI Forward Deployed Engineer & Data Operations",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://palantir.com",
+    "featured": false
+  },
+  {
+    "id": "dir-waymo",
+    "company": "Waymo",
+    "title": "Autonomous Driving Simulation & ML Evaluation Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://waymo.com",
+    "featured": false
+  },
+  {
+    "id": "dir-aurora",
+    "company": "Aurora Innovation",
+    "title": "Self-Driving Perception & AI Data Triage Specialist",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://aurora.tech",
+    "featured": false
+  },
+  {
+    "id": "dir-nuro",
+    "company": "Nuro",
+    "title": "Autonomous Delivery Vehicle AI & Mapping Analyst",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://nuro.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-zoox",
+    "company": "Zoox",
+    "title": "Autonomous Mobility AI & Scenario Simulation Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://zoox.com",
+    "featured": false
+  },
+  {
+    "id": "dir-wayve",
+    "company": "Wayve",
+    "title": "Embodied Driving AI & Vision-Language-Action Research",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Europe",
+    "url": "https://wayve.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-waabi",
+    "company": "Waabi",
+    "title": "Generative AI Simulation & Autonomous Trucking Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://waabi.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-applied-intuition",
+    "company": "Applied Intuition",
+    "title": "Autonomous Vehicle Simulation & Synthetic Data Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://appliedintuition.com",
+    "featured": false
+  },
+  {
+    "id": "dir-roboflow",
+    "company": "Roboflow",
+    "title": "Computer Vision Developer Advocate & Dataset Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://roboflow.com",
+    "featured": false
+  },
+  {
+    "id": "dir-clarifai",
+    "company": "Clarifai",
+    "title": "Computer Vision & Multimodal AI Platform Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://clarifai.com",
+    "featured": false
+  },
+  {
+    "id": "dir-landing-ai",
+    "company": "LandingAI",
+    "title": "Visual Inspection AI & Computer Vision Specialist",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://landing.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-voxel51",
+    "company": "Voxel51",
+    "title": "Visual AI Dataset Curation & Open-Source Engineer",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://voxel51.com",
+    "featured": false
+  },
+  {
+    "id": "dir-ultralytics",
+    "company": "Ultralytics",
+    "title": "YOLO Computer Vision & Edge AI Developer Roles",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://ultralytics.com",
+    "featured": false
+  },
+  {
+    "id": "dir-twelve-labs",
+    "company": "Twelve Labs",
+    "title": "Video Understanding Foundation Model & Multimodal AI",
+    "category": "AI Engineering & Dev",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://twelvelabs.io",
+    "featured": false
+  },
+  {
+    "id": "dir-verkada",
+    "company": "Verkada",
+    "title": "Computer Vision Security & Edge AI Software Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://verkada.com",
+    "featured": false
+  },
+  {
+    "id": "dir-nvidia",
+    "company": "NVIDIA",
+    "title": "AI Infrastructure, CUDA & Generative Model Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://nvidia.com",
+    "featured": false
+  },
+  {
+    "id": "dir-amd",
+    "company": "AMD",
+    "title": "AI Software Ecosystem & ROCm ML Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://amd.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cerebras",
+    "company": "Cerebras Systems",
+    "title": "Wafer-Scale AI Compute & LLM Training Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://cerebras.net",
+    "featured": false
+  },
+  {
+    "id": "dir-sambanova",
+    "company": "SambaNova Systems",
+    "title": "Enterprise AI Chip & Foundation Model Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://sambanova.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-tenstorrent",
+    "company": "Tenstorrent",
+    "title": "Open-Source AI Silicon & Compiler Software Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://tenstorrent.com",
+    "featured": false
+  },
+  {
+    "id": "dir-d-matrix",
+    "company": "d-Matrix",
+    "title": "In-Memory AI Inference & ML Kernel Engineer",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://d-matrix.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-hailo",
+    "company": "Hailo",
+    "title": "Edge AI Processor & Computer Vision SDK Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://hailo.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-ambarella",
+    "company": "Ambarella",
+    "title": "Edge AI Vision SoC & Autonomous Perception Roles",
+    "category": "Robotics & Hardware AI",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://ambarella.com",
+    "featured": false
+  },
+  {
+   "id": "dir-sight-machine",
+   "company": "Sight Machine",
+   "title": "Manufacturing AI & Industrial Data Operations",
+   "category": "AI & Tech Operations",
+   "pay": "Competitive / Remote",
+   "location": "Remote",
+   "url": "sightmachine.com",
+   "featured": false
+},
+{
+   "id": "dir-covariant",
+   "company": "Covariant",
+   "title": "Warehouse Robotics Foundation Model & Vision Roles",
+   "category": "Robotics & Hardware AI",
+   "pay": "Competitive / Remote",
+   "location": "Remote / Hybrid",
+   "url": "covariant.ai",
+   "featured": false
+},
+{
+   "id": "dir-righthand-robotics",
+   "company": "RightHand Robotics",
+   "title": "Autonomous Picking & Robotics ML Software Roles",
+   "category": "Robotics & Hardware AI",
+   "pay": "Competitive / Remote",
+   "location": "Remote / Hybrid",
+   "url": "righthandrobotics.com",
+   "featured": false
+},
 ]
+  
+    
