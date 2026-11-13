@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -81,7 +80,9 @@ fun SavedTrackerScreen(
     val filteredList = if (selectedFilterStatus == null) {
         bookmarkedCompanies
     } else {
-        bookmarkedCompanies.filter { (statuses[it.id] ?: ApplicationStatus.SAVED) == selectedFilterStatus }
+        bookmarkedCompanies.filter {
+            (statuses[it.id] ?: ApplicationStatus.SAVED) == selectedFilterStatus
+        }
     }
 
     LazyColumn(
@@ -189,7 +190,8 @@ fun SavedTrackerScreen(
                 }
             }
         }
-               item(key = "tracker_filter_row") {
+
+        item(key = "tracker_filter_row") {
             val options = listOf(
                 BentoFilterOption<ApplicationStatus?>(
                     value = null,
@@ -213,60 +215,6 @@ fun SavedTrackerScreen(
             )
             Spacer(modifier = Modifier.height(6.dp))
         }
-
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
-                            containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
-                        ),
-                        shape = RoundedCornerShape(18.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                        )
-                    )
-                }
-
-                items(
-                    items = ApplicationStatus.entries,
-                    key = { it.name }
-                ) { st ->
-                    val count = bookmarkedCompanies.count {
-                        (statuses[it.id] ?: ApplicationStatus.SAVED) == st
-                    }
-                    val isSelected = selectedFilterStatus == st
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { selectedFilterStatus = st },
-                        label = {
-                            Text(
-                                text = "${st.displayName} ($count)",
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = EmeraldPrimary,
-                            selectedLabelColor = AtlasDarkNavy,
-                            containerColor = AtlasNavySurface,
-                            labelColor = TextSecondary
-                        ),
-                        shape = RoundedCornerShape(18.dp),
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = isSelected,
-                            borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                        )
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(6.dp))
-        }
-
         if (filteredList.isEmpty()) {
             item(key = "empty_tracker_state") {
                 Card(
