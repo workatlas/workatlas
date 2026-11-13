@@ -14,71 +14,48 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch 100+ Remote Jobs and Live AI News
+      - name: Fetch Live ATS Jobs and AI News
         run: |
           node -e '
           const fs = require("fs");
-
-          const getCat = (txt) => /audio|voice|speech|linguist|transcri|support|writer|editor|content|community/i.test(txt)
-            ? "Audio & Voice"
-            : "Data & AI Training";
+          const existing = JSON.parse(fs.readFileSync("ats-jobs.json", "utf8"));
+          const getCat = (t) => /audio|voice|speech|linguist|transcri|support|writer/i.test(t) ? "Audio & Voice" : "Data & AI Training";
 
           async function run() {
-            let jobs = [];
-
+            let live = [];
             try {
               const r = await fetch("https://arbeitnow.com");
               if (r.ok) {
                 const d = await r.json();
-                const items = (d.data || []).slice(0, 70).map(j => ({
-                  id: `arb-${j.slug}`,
+                live = (d.data || []).slice(0, 50).map(j => ({
+                  id: "arb-" + j.slug,
                   company: j.company_name,
                   title: j.title,
-                  category: getCat(j.title + " " + (j.tags || []).join(" ")),
+                  category: getCat(j.title),
                   pay: j.remote ? "Remote / Competitive" : "Competitive",
-                  location: j.remote ? `Remote (${j.location})` : j.location,
+                  location: j.remote ? "Remote (" + j.location + ")" : j.location,
                   url: j.url,
                   featured: false
                 }));
-                jobs.push(...items);
               }
             } catch (e) {}
 
-            try {
-              const r = await fetch("https://remotive.com");
-              if (r.ok) {
-                const d = await r.json();
-                const items = (d.jobs || []).map(j => ({
-                  id: `rem-${j.id}`,
-                  company: j.company_name,
-                  title: j.title,
-                  category: getCat(j.title + " " + j.category),
-                  pay: j.salary || "Remote / Competitive",
-                  location: j.candidate_required_location || "Worldwide / Remote",
-                  url: j.url,
-                  featured: false
-                }));
-                jobs.push(...items);
-              }
-            } catch (e) {}
+            const seen = new Set();
+            const merged = [...existing, ...live].filter(x => !seen.has(x.id) && seen.add(x.id));
+            fs.writeFileSync("ats-jobs.json", JSON.stringify(merged, null, 2));
 
-            fs.writeFileSync("ats-jobs.json", JSON.stringify(jobs, null, 2));
-            console.log("Saved jobs:", jobs.length);
-
-            let news = [];
             try {
               const nr = await fetch("https://algolia.com");
               if (nr.ok) {
                 const nd = await nr.json();
-                news = (nd.hits || []).map(h => ({
+                const news = (nd.hits || []).map(h => ({
                   title: h.title,
-                  url: h.url || `https://ycombinator.com{h.objectID}`,
+                  url: h.url || "https://ycombinator.com" + h.objectID,
                   date: h.created_at
                 }));
+                if (news.length) fs.writeFileSync("ai-news.json", JSON.stringify(news, null, 2));
               }
             } catch (e) {}
-            fs.writeFileSync("ai-news.json", JSON.stringify(news, null, 2));
-            console.log("Saved news:", news.length);
           }
           run();
           '
@@ -88,4 +65,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
           git add -A
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update ATS jobs and AI news" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update ATS jobs" && git push)
