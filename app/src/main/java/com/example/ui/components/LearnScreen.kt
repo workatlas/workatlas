@@ -189,8 +189,7 @@ fun LearnScreen(
                     }
                 }
             }
-        }
-               item(key = "learn_category_filters") {
+        }        item(key = "learn_category_filters") {
             val options = listOf(
                 BentoFilterOption<LearnCategory?>(value = null, label = "All Topics")
             ) + LearnCategory.entries.map { category ->
@@ -202,6 +201,7 @@ fun LearnScreen(
                 onSelect = onCategorySelected
             )
         }
+
 
                 item(key = "all_topics") {
                     val isSelected = selectedCategory == null
