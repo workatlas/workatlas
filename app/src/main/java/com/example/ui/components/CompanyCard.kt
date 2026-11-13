@@ -82,27 +82,7 @@ fun CategoryFilterRow(
         modifier = modifier
     )
 }
-
-
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = EmeraldPrimary,
-                    selectedLabelColor = AtlasDarkNavy,
-                    containerColor = AtlasNavySurface,
-                    labelColor = TextSecondary
-                ),
-                shape = RoundedCornerShape(20.dp),
-                border = FilterChipDefaults.filterChipBorder(
-                    enabled = true,
-                    selected = isSelected,
-                    borderColor = if (isSelected) EmeraldPrimary else AtlasNavyBorder
-                ),
-                modifier = Modifier.testTag("filter_chip_${category.name.lowercase()}")
-            )
-        }
-    }
-}
-
-
+           
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CompanyCard(
