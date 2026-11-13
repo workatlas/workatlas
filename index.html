@@ -5,17 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WorkAtlas — Remote AI Jobs, Free Tools &amp; Career Hub</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #020617;
-      color: #f1f5f9;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.5;
-    }
-    header {
+ .marquee-bar {
+  background: #020617; border-top: 1px solid #1e293b; overflow: hidden;
+  white-space: nowrap; padding: 6px 0; font-size: 11px; color: #93c5fd;
+}
+ .marquee-track {
+  display: inline-block; padding-left: 100%;
+  animation: marqueeScroll 28s linear infinite;
+}
+  @keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+    <div class="marquee-bar">
+  <div class="marquee-track">
+    Featured &amp; Hiring Partners: &nbsp;•&nbsp; micro1 &nbsp;•&nbsp; Mercor &nbsp;•&nbsp; Babel Audio &nbsp;•&nbsp; Visora &nbsp;•&nbsp; Spout &nbsp;•&nbsp; Scale AI &nbsp;•&nbsp; Invisible Technologies &nbsp;•&nbsp; Labelbox &nbsp;•&nbsp; Runway &nbsp;•&nbsp; Alignerr &nbsp;•&nbsp; Appen CrowdGen &nbsp;•&nbsp; Hugging Face &nbsp;•&nbsp; Perplexity AI
+  </div>
+</div>
+
+      header {
       position: sticky;
       top: 0;
       z-index: 30;
@@ -279,6 +287,15 @@
           </div>
         </div>
 
+        <div class="card">
+  <div>
+    <div class="card-top"><span class="company-name">Cursor AI</span><span class="badge badge-green">Free Tier</span></div>
+    <h4 class="job-title">AI-First Code Editor</h4>
+    <p class="job-meta">Write, debug, and refactor code faster with built-in AI pair programming.</p>
+  </div>
+  <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Open Cursor</a>
+</div>
+
         <h3 style="font-size: 13px; color: #60a5fa; margin-top: 10px;">App Development &amp; Free Hosting</h3>
         <div class="grid-cards">
           <div class="card">
@@ -337,6 +354,35 @@
         </div>
       </div>
     </section>
+<div class="section-box">
+  <div class="card-top">
+    <h2 class="section-title">Voice Recording Practice &amp; Sample Scripts</h2>
+    <span class="badge">Audio Assessment Prep</span>
+  </div>
+  <p class="section-desc">Read one of these sample prompts aloud to practice natural pacing, clarity, and background-noise control before applying to voice platforms like Babel Audio.</p>
+  <div class="grid-cards">
+    <div class="card">
+      <div>
+        <span class="badge badge-green">Sample Script 1 • Conversational</span>
+        <h4 class="job-title">Natural Everyday Dialogue</h4>
+        <p class="job-meta" style="color: #e2e8f0; font-style: italic;">"Hey! I was just checking the weather forecast for this weekend, and it looks like Saturday morning will finally be sunny. Do you still want to grab coffee around ten and walk through the park?"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div>
+        <span class="badge badge-green">Sample Script 2 • Clear Narration</span>
+        <h4 class="job-title">Informative Tech Reading</h4>
+        <p class="job-meta" style="color: #e2e8f0; font-style: italic;">"Artificial intelligence models learn best when trained on clear, natural human speech. Speaking at a steady pace without rushing helps ensure every syllable is captured accurately."</p>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+    <button onclick="testMicrophone()" class="btn-primary" id="micTestBtn">Test My Microphone (5 Sec)</button>
+    <span id="micStatus" class="section-desc">Click to check if your browser microphone is clear and ready.</span>
+  </div>
+</div>
+
+    
     <!-- TAB 4: LEARNING HUB & LIVE AI NEWS -->
     <section id="tab-learn" class="tab-panel">
       <div class="section-box">
@@ -675,26 +721,42 @@ ${name}`;
       a.click();
     }
 
-    async function loadAINews() {
-      const newsGrid = document.getElementById("newsGrid");
-      try {
-        const res = await fetch("https://algolia.com");
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        newsGrid.innerHTML = (data.hits || []).map(item => `
-          <div class="card">
-            <div>
-              <span class="badge badge-green">AI Industry Update</span>
-              <h4 class="job-title">${item.title}</h4>
-              <p class="job-meta">Published: <span>${new Date(item.created_at).toLocaleDateString()}</span></p>
-            </div>
-            <a href="${item.url || 'https://ycombinator.com' + item.objectID}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read Story</a>
-          </div>
-        `).join("");
-      } catch {
-        newsGrid.innerHTML = `<p class="section-desc">Check back shortly for live AI industry updates.</p>`;
-      }
-    }
+   async function loadAINews() {
+  const newsGrid = document.getElementById("newsGrid");
+  try {
+    const res = await fetch(`./ai-news.json?v=${Date.now()}`);
+    if (!res.ok) throw new Error();
+    const items = await res.json();
+    if (!items.length) throw new Error();
+    newsGrid.innerHTML = items.map(item => `
+      <div class="card">
+        <div>
+          <span class="badge badge-green">AI Industry Update</span>
+          <h4 class="job-title">${item.title}</h4>
+          <p class="job-meta">Published: <span>${new Date(item.date).toLocaleDateString()}</span></p>
+        </div>
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read Story</a>
+      </div>
+    `).join("");
+  } catch {
+    newsGrid.innerHTML = `<p class="section-desc">Run the Auto-Sync workflow in GitHub Actions to populate live AI headlines.</p>`;
+  }
+}
+
+async function testMicrophone() {
+  const status = document.getElementById("micStatus");
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    status.textContent = "Microphone detected and working! Speak clearly for 5 seconds...";
+    setTimeout(() => {
+      stream.getTracks().forEach(track => track.stop());
+      status.textContent = "Mic check passed! Your audio input is ready for voice assessments.";
+      showToast("Microphone check passed!");
+    }, 5000);
+  } catch {
+    status.textContent = "Microphone access blocked or not found. Allow mic permissions in Chrome settings.";
+  }
+}
 
     function subscribeNewsletter() {
       const emailInput = document.getElementById("subEmail");
