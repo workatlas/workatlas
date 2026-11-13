@@ -418,9 +418,9 @@
     "location": "Worldwide / Remote",
     "url": "remote.co",
     "featured": false
-  }
-  {
-  {
+   }, 
+   {   
+
     "id": "dir-openai",
     "company": "OpenAI",
     "title": "AI Research, Model Safety & Operations Roles",
