@@ -1,1 +1,422 @@
-[]
+[
+  {
+    "id": "dir-dataannotation",
+    "company": "DataAnnotation",
+    "title": "AI Trainer, Writing & Coding Evaluator",
+    "category": "Data & AI Training",
+    "pay": "$20 - $40+ / hr",
+    "location": "Remote (US, UK, CA, AU, NZ, IE)",
+    "url": "https://dataannotation.tech",
+    "featured": false
+  },
+  {
+    "id": "dir-outlier",
+    "company": "Outlier AI",
+    "title": "AI Writing Evaluator & Subject Matter Specialist",
+    "category": "Data & AI Training",
+    "pay": "$15 - $50 / hr",
+    "location": "Global / Remote",
+    "url": "https://outlier.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-telus",
+    "company": "TELUS Digital AI",
+    "title": "Online Data Analyst & Search Relevance Rater",
+    "category": "Data & AI Training",
+    "pay": "Project / Hourly Rate",
+    "location": "Global / Remote",
+    "url": "https://telusdigital.com",
+    "featured": false
+  },
+  {
+    "id": "dir-oneforma",
+    "company": "OneForma (Centific)",
+    "title": "AI Data Collection, Translation & Search Evaluation",
+    "category": "Data & AI Training",
+    "pay": "Task / Hourly Rate",
+    "location": "Global / Remote",
+    "url": "https://oneforma.com",
+    "featured": false
+  },
+  {
+    "id": "dir-welocalize",
+    "company": "Welocalize",
+    "title": "Search Quality Rater & Ads Quality Reviewer",
+    "category": "Data & AI Training",
+    "pay": "$14 - $20 / hr",
+    "location": "Global / Remote",
+    "url": "https://lever.co",
+    "featured": false
+  },
+  {
+    "id": "dir-rws",
+    "company": "RWS TrainAI",
+    "title": "AI Data Specialist & Linguistic Annotator",
+    "category": "Data & AI Training",
+    "pay": "Project / Hourly Rate",
+    "location": "Global / Remote",
+    "url": "https://rws.com",
+    "featured": false
+  },
+  {
+    "id": "dir-removetasks",
+    "company": "Remotasks",
+    "title": "3D LiDAR, Image & Text Annotation Contributor",
+    "category": "Data & AI Training",
+    "pay": "Task-Based / USD",
+    "location": "Global / Remote",
+    "url": "https://remotasks.com",
+    "featured": false
+  },
+  {
+    "id": "dir-scaleai",
+    "company": "Scale AI",
+    "title": "Generative AI Contributor & Quality Reviewer",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://scale.com",
+    "featured": false
+  },
+  {
+    "id": "dir-toloka",
+    "company": "Toloka AI",
+    "title": "AI Tutor, Data Labeler & Model Evaluator",
+    "category": "Data & AI Training",
+    "pay": "Task / Project Based",
+    "location": "Global / Remote",
+    "url": "https://toloka.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-clickworker",
+    "company": "Clickworker",
+    "title": "AI Training Data, Voice & Photo Collector",
+    "category": "Data & AI Training",
+    "pay": "Task-Based / USD & EUR",
+    "location": "Global / Remote",
+    "url": "https://clickworker.com",
+    "featured": false
+  },
+  {
+    "id": "dir-turing",
+    "company": "Turing",
+    "title": "Remote AI Trainer, LLM Evaluator & Developer",
+    "category": "Data & AI Training",
+    "pay": "$20 - $70+ / hr",
+    "location": "Global / Remote",
+    "url": "https://turing.com",
+    "featured": false
+  },
+  {
+    "id": "dir-invisible",
+    "company": "Invisible Technologies",
+    "title": "Advanced AI Data Trainer & Operations Operator",
+    "category": "Data & AI Training",
+    "pay": "$15 - $35 / hr",
+    "location": "Global / Remote",
+    "url": "https://invisible.co",
+    "featured": false
+  },
+  {
+    "id": "dir-mindrift",
+    "company": "Mindrift (Toloka)",
+    "title": "Freelance AI Tutor & Domain Writer",
+    "category": "Data & AI Training",
+    "pay": "$15 - $40 / hr",
+    "location": "Global / Remote",
+    "url": "https://mindrift.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-stellarai",
+    "company": "Stellar AI",
+    "title": "AI Reasoning & Logic Prompt Evaluator",
+    "category": "Data & AI Training",
+    "pay": "$25+ / hr",
+    "location": "Remote",
+    "url": "https://joinstellar.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-lxt",
+    "company": "LXT AI",
+    "title": "Multilingual Data Collector & Speech Annotator",
+    "category": "Audio & Voice",
+    "pay": "Project / Hourly Rate",
+    "location": "Global / Remote",
+    "url": "https://lxt.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-definedai",
+    "company": "Defined.ai",
+    "title": "Speech Recording & Audio Transcription Contributor",
+    "category": "Audio & Voice",
+    "pay": "Task-Based / USD",
+    "location": "Global / Remote",
+    "url": "https://defined.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-transperfect",
+    "company": "TransPerfect DataForce",
+    "title": "Voice Data Collection & Linguistic Evaluator",
+    "category": "Audio & Voice",
+    "pay": "Project-Based / USD",
+    "location": "Global / Remote",
+    "url": "https://transperfect.com",
+    "featured": false
+  },
+  {
+    "id": "dir-productiveplayhouse",
+    "company": "Productive Playhouse",
+    "title": "Remote Audio Recording & Transcription Specialist",
+    "category": "Audio & Voice",
+    "pay": "Project / Hourly Rate",
+    "location": "Global / Remote",
+    "url": "https://productiveplayhouse.com",
+    "featured": false
+  },
+  {
+    "id": "dir-apptek",
+    "company": "AppTek",
+    "title": "Speech Recognition Linguist & Audio Annotator",
+    "category": "Audio & Voice",
+    "pay": "Contract / Remote",
+    "location": "Global / Remote",
+    "url": "https://apptek.com",
+    "featured": false
+  },
+  {
+    "id": "dir-rev",
+    "company": "Rev",
+    "title": "Freelance Audio Transcriptionist & Captioner",
+    "category": "Audio & Voice",
+    "pay": "$0.30 - $1.10 / audio min",
+    "location": "Remote",
+    "url": "https://rev.com",
+    "featured": false
+  },
+  {
+    "id": "dir-transcribeme",
+    "company": "TranscribeMe",
+    "title": "Short-Clip Audio Transcription & AI Training",
+    "category": "Audio & Voice",
+    "pay": "$15 - $22 / audio hr",
+    "location": "Global / Remote",
+    "url": "https://transcribeme.com",
+    "featured": false
+  },
+  {
+    "id": "dir-gotranscript",
+    "company": "GoTranscript",
+    "title": "Remote Audio Transcriptionist & Translator",
+    "category": "Audio & Voice",
+    "pay": "Up to $0.60 / audio min",
+    "location": "Global / Remote",
+    "url": "https://gotranscript.com",
+    "featured": false
+  },
+  {
+    "id": "dir-verbit",
+    "company": "Verbit",
+    "title": "AI Caption Editor & Transcriptionist",
+    "category": "Audio & Voice",
+    "pay": "Task / Audio Minute",
+    "location": "Global / Remote",
+    "url": "https://verbit.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-cloudfactory",
+    "company": "CloudFactory",
+    "title": "Managed Data Labeling & Computer Vision Analyst",
+    "category": "Data & AI Training",
+    "pay": "Contract / Remote",
+    "location": "Global / Remote",
+    "url": "https://cloudfactory.com",
+    "featured": false
+  },
+  {
+    "id": "dir-sama",
+    "company": "Sama AI",
+    "title": "AI Training Data Quality Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://sama.com",
+    "featured": false
+  },
+  {
+    "id": "dir-labelbox",
+    "company": "Labelbox (Alignerr Network)",
+    "title": "AI Data Labeling & Multimodal Reviewer",
+    "category": "Data & AI Training",
+    "pay": "$15 - $60 / hr",
+    "location": "Global / Remote",
+    "url": "https://labelbox.com",
+    "featured": false
+  },
+  {
+    "id": "dir-braintrust",
+    "company": "Braintrust",
+    "title": "Remote AI Engineer, Product & Data Freelancer",
+    "category": "Data & AI Training",
+    "pay": "$30 - $120 / hr",
+    "location": "Global / Remote",
+    "url": "https://usebraintrust.com",
+    "featured": false
+  },
+  {
+    "id": "dir-perplexity",
+    "company": "Perplexity AI",
+    "title": "AI Search Quality & Product Operations",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://perplexity.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-huggingface",
+    "company": "Hugging Face",
+    "title": "Open-Source AI Community & Dataset Engineer",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://workable.com",
+    "featured": false
+  },
+  {
+    "id": "dir-anthropic",
+    "company": "Anthropic",
+    "title": "AI Safety, Trust & Operations Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Hybrid",
+    "url": "https://anthropic.com",
+    "featured": false
+  },
+  {
+    "id": "dir-cohere",
+    "company": "Cohere",
+    "title": "Enterprise LLM Evaluation & Data Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Global / Remote",
+    "url": "https://cohere.com",
+    "featured": false
+  },
+  {
+    "id": "dir-mistral",
+    "company": "Mistral AI",
+    "title": "AI Model Evaluation & Applied Engineering",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote / Europe",
+    "url": "https://mistral.ai",
+    "featured": false
+  },
+  {
+    "id": "dir-runway",
+    "company": "Runway",
+    "title": "Generative Video & Multimodal AI Specialist",
+    "category": "Data & AI Training",
+    "pay": "Competitive / Remote",
+    "location": "Remote",
+    "url": "https://runwayml.com",
+    "featured": false
+  },
+  {
+    "id": "dir-snorkel",
+    "company": "Snorkel AI",
+    "title": "Subject Matter Expert — AI Data Curation",
+"category": "Data & AI Training",
+"pay": "$30 - $80 / hr",
+"location": "Remote",
+"url": "snorkel.ai",
+"featured": false
+},
+{
+"id": "dir-surgeai",
+"company": "Surge AI",
+"title": "RLHF Data Trainer & Creative Writing Evaluator",
+"category": "Data & AI Training",
+"pay": "$20 - $50 / hr",
+"location": "Remote",
+"url": "surgehq.ai",
+"featured": false
+},
+{
+"id": "dir-pareto",
+"company": "Pareto AI",
+"title": "AI Data Labeling & Research Operations",
+"category": "Data & AI Training",
+"pay": "$15 - $35 / hr",
+"location": "Global / Remote",
+"url": "pareto.ai",
+"featured": false
+},
+{
+"id": "dir-upwork-ai",
+"company": "Upwork AI Talent Hub",
+"title": "Freelance Prompt Engineer, Data Annotator & Voice Actor",
+"category": "Data & AI Training",
+"pay": "Hourly / Fixed Contract",
+"location": "Global / Remote",
+"url": "upwork.com",
+"featured": false
+},
+{
+"id": "dir-prolific",
+"company": "Prolific",
+"title": "AI Model Feedback & Research Study Participant",
+"category": "Data & AI Training",
+"pay": "$8 - $18+ / hr",
+"location": "Global / Remote",
+"url": "prolific.com",
+"featured": false
+},
+{
+"id": "dir-usertesting",
+"company": "UserTesting",
+"title": "Website, App & AI Prototype Voice Reviewer",
+"category": "Audio & Voice",
+"pay": "$10 per 20-min test",
+"location": "Global / Remote",
+"url": "usertesting.com",
+"featured": false
+},
+{
+"id": "dir-testio",
+"company": "Test IO (EPAM)",
+"title": "Freelance App & Website QA Tester",
+"category": "Data & AI Training",
+"pay": "Per Bug / Test Cycle",
+"location": "Global / Remote",
+"url": "test.io",
+"featured": false
+},
+{
+"id": "dir-utest",
+"company": "uTest (Applause)",
+"title": "AI Usability, Voice & Functional Software Tester",
+"category": "Audio & Voice",
+"pay": "Project / Payout Based",
+"location": "Global / Remote",
+"url": "utest.com",
+"featured": false
+},
+{
+"id": "dir-datadog-remote",
+"company": "Remote.co AI & Tech Board",
+"title": "Curated Worldwide Remote Customer & AI Operations",
+"category": "Data & AI Training",
+"pay": "Competitive / Remote",
+"location": "Worldwide / Remote",
+"url": "remote.co",
+"featured": false
+}
+]
