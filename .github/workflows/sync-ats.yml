@@ -1,0 +1,120 @@
+name: Auto-Sync Public ATS Jobs
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch Live ATS Feeds
+        run: |
+          node -e '
+          const fs = require("fs");
+
+          const GH_BOARDS = [
+            { name: "Scale AI", slug: "scaleai" },
+            { name: "Invisible Technologies", slug: "invisibletechnologies" },
+            { name: "Toloka", slug: "toloka" },
+            { name: "Labelbox", slug: "labelbox" },
+            { name: "Runway", slug: "runwayml" }
+          ];
+
+          const LEVER_BOARDS = [
+            { name: "Mistral AI", slug: "mistral" },
+            { name: "Cohere", slug: "cohere" }
+          ];
+
+          const ASHBY_BOARDS = [
+            { name: "Perplexity AI", slug: "perplexity" },
+            { name: "Hugging Face", slug: "huggingface" }
+          ];
+
+          const isRelevant = (txt) => /remote|data|ai|annotat|train|audio|voice|evaluat|linguist|label|prompt|model|content|quality|support/i.test(txt);
+          const getCat = (txt) => /audio|voice|speech|linguist|transcri|support|writer/i.test(txt) ? "Audio & Voice" : "Data & AI Training";
+
+          async function run() {
+            let jobs = [];
+
+            for (const b of GH_BOARDS) {
+              try {
+                const r = await fetch(`https://greenhouse.io{b.slug}/jobs`);
+                const d = await r.json();
+                const items = (d.jobs || [])
+                  .filter(j => isRelevant(j.title + " " + (j.location?.name || "")))
+                  .slice(0, 20)
+                  .map(j => ({
+                    id: `gh-${b.slug}-${j.id}`,
+                    company: b.name,
+                    title: j.title,
+                    category: getCat(j.title),
+                    pay: "Competitive / Remote",
+                    location: j.location?.name || "Remote",
+                    url: j.absolute_url,
+                    featured: false
+                  }));
+                jobs.push(...items);
+              } catch (e) {}
+            }
+
+            for (const b of LEVER_BOARDS) {
+              try {
+                const r = await fetch(`https://lever.co{b.slug}?mode=json`);
+                const d = await r.json();
+                const items = (d || [])
+                  .filter(j => isRelevant(j.text + " " + (j.categories?.location || "")))
+                  .slice(0, 20)
+                  .map(j => ({
+                    id: `lv-${b.slug}-${j.id}`,
+                    company: b.name,
+                    title: j.text,
+                    category: getCat(j.text),
+                    pay: "Competitive / Remote",
+                    location: j.categories?.location || "Remote",
+                    url: j.hostedUrl,
+                    featured: false
+                  }));
+                jobs.push(...items);
+              } catch (e) {}
+            }
+
+            for (const b of ASHBY_BOARDS) {
+              try {
+                const r = await fetch(`https://ashbyhq.com{b.slug}`);
+                const d = await r.json();
+                const items = (d.jobs || [])
+                  .filter(j => isRelevant(j.title + " " + (j.location || "")))
+                  .slice(0, 20)
+                  .map(j => ({
+                    id: `ash-${b.slug}-${j.id}`,
+                    company: b.name,
+                    title: j.title,
+                    category: getCat(j.title),
+                    pay: "Competitive / Remote",
+                    location: j.location || "Remote",
+                    url: j.jobUrl,
+                    featured: false
+                  }));
+                jobs.push(...items);
+              } catch (e) {}
+            }
+
+            fs.writeFileSync("ats-jobs.json", JSON.stringify(jobs, null, 2));
+            console.log("Saved jobs:", jobs.length);
+          }
+          run();
+          '
+
+      - name: Commit Updated Job List
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@://github.com"
+          git add ats-jobs.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update ATS jobs" && git push)
