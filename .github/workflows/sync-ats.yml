@@ -65,19 +65,20 @@ jobs:
             fs.writeFileSync("ats-jobs.json", JSON.stringify(jobs, null, 2));
             console.log("Saved jobs:", jobs.length);
 
+            let news = [];
             try {
               const nr = await fetch("https://algolia.com");
               if (nr.ok) {
                 const nd = await nr.json();
-                const news = (nd.hits || []).map(h => ({
+                news = (nd.hits || []).map(h => ({
                   title: h.title,
                   url: h.url || `https://ycombinator.com{h.objectID}`,
                   date: h.created_at
                 }));
-                fs.writeFileSync("ai-news.json", JSON.stringify(news, null, 2));
-                console.log("Saved news:", news.length);
               }
             } catch (e) {}
+            fs.writeFileSync("ai-news.json", JSON.stringify(news, null, 2));
+            console.log("Saved news:", news.length);
           }
           run();
           '
@@ -86,5 +87,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
-          git add ats-jobs.json ai-news.json
+          git add -A
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update ATS jobs and AI news" && git push)
